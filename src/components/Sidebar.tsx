@@ -29,19 +29,19 @@ const Sidebar: React.FC = () => {
   const navItems: NavItem[] = [{
     name: 'Knowledge',
     icon: <BookOpen size={20} />,
-    path: '/app/knowledge'
+    path: '/knowledge'
   }, {
     name: 'Bookmarks',
     icon: <Bookmark size={20} />,
-    path: '/app/bookmarks'
+    path: '/bookmarks'
   }, {
     name: 'Account',
     icon: <User size={20} />,
-    path: '/app/account'
+    path: '/account'
   }, {
     name: 'Find a lawyer',
     icon: <Scale size={20} />,
-    path: '/app/find-lawyer',
+    path: '/find-lawyer',
     badge: 'Pro'
   }];
 
@@ -49,26 +49,26 @@ const Sidebar: React.FC = () => {
   const recentChats: ChatItem[] = [{
     id: '1',
     title: 'File a NDA for all free zon...',
-    path: '/app/chat?id=1'
+    path: '/chat?id=1'
   }, {
     id: '2',
     title: 'Filing tax in UAE',
-    path: '/app/chat?id=2'
+    path: '/chat?id=2'
   }, {
     id: '3',
     title: 'Generate TODO list for st...',
-    path: '/app/chat?id=3'
+    path: '/chat?id=3'
   }];
 
   // Check if the current path is a chat with a specific ID
   const isActiveChatPath = (path: string) => {
-    return location.pathname === '/app/chat' && 
+    return location.pathname === '/chat' && 
            searchParams.get('id') === path.split('=')[1];
   };
 
   const handleNewChat = () => {
-    // Clear any existing chat ID by navigating to /app/chat without params
-    navigate('/app/chat');
+    // Clear any existing chat ID by navigating to /chat without params
+    navigate('/chat');
     
     toast({
       title: "New Chat",
