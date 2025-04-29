@@ -1,9 +1,7 @@
-
 import React from 'react';
 import ChatMessage from '../ChatMessage';
 import { Message } from '../../hooks/useChat';
 import { ActionLogStep } from '../../hooks/useChat';
-
 interface ChatContainerProps {
   messages: Message[];
   loading?: boolean;
@@ -11,28 +9,17 @@ interface ChatContainerProps {
   onBookmark?: (messageId: string) => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
 }
-
-const ChatContainer: React.FC<ChatContainerProps> = ({ 
-  messages, 
+const ChatContainer: React.FC<ChatContainerProps> = ({
+  messages,
   loading = false,
   actionLogSteps = [],
   onBookmark,
-  onFeedback,
+  onFeedback
 }) => {
-  return (
-    <div className="flex-1 overflow-y-auto pb-24">
-      {messages.map((message) => (
-        <ChatMessage 
-          key={message.id} 
-          message={message} 
-          actionLogSteps={message.sender === 'ai' ? actionLogSteps : []} 
-          onBookmark={onBookmark}
-          onFeedback={onFeedback}
-        />
-      ))}
+  return <div className="flex-1 overflow-y-auto pb-24">
+      {messages.map(message => <ChatMessage key={message.id} message={message} actionLogSteps={message.sender === 'ai' ? actionLogSteps : []} onBookmark={onBookmark} onFeedback={onFeedback} />)}
       
-      {loading && (
-        <div className="py-6 bg-gray-50">
+      {loading && <div className="py-6 bg-transparent">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex items-start gap-x-3">
               <div className="flex flex-col space-y-2 animate-pulse">
@@ -42,10 +29,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
               </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
-  );
+        </div>}
+    </div>;
 };
-
 export default ChatContainer;
