@@ -1,6 +1,4 @@
-
 import React from 'react';
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import ActionLog from './ActionLog';
 import FormattedContent from './FormattedContent';
 import MessageActions from './MessageActions';
@@ -32,24 +30,15 @@ const AIMessage: React.FC<AIMessageProps> = ({
     <div className="py-6 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex flex-col">
-          <div className="flex mb-4">
-            {/* Avatar */}
-            <div className="flex-shrink-0 mr-3">
-              <Avatar className="h-8 w-8 bg-muwakkil-purple">
-                <AvatarImage
-                  src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
-                  alt="Muwakkil Logo"
-                  className="h-full w-full p-1.5"
-                />
-              </Avatar>
+          {/* Action Log component - keep at the top */}
+          {actionLogSteps.length > 0 && (
+            <div className="mb-4">
+              <ActionLog steps={actionLogSteps} />
             </div>
-            
-            {/* Action Log component */}
-            {actionLogSteps.length > 0 && <ActionLog steps={actionLogSteps} />}
-          </div>
+          )}
           
-          {/* Content moved below avatar and action log */}
-          <div className="ml-11">
+          {/* Content now aligned to the left */}
+          <div>
             <FormattedContent content={content} />
             
             <MessageActions 
