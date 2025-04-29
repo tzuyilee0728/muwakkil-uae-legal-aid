@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Avatar } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -81,11 +81,11 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex space-x-3">
           <div className="flex-shrink-0 mt-1">
-            <Avatar className="h-8 w-8">
-              <img
+            <Avatar className="h-8 w-8 bg-muwakkil-purple">
+              <AvatarImage
                 src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
                 alt="Muwakkil Logo"
-                className="h-8 w-8"
+                className="h-full w-full p-1.5"
               />
             </Avatar>
           </div>
@@ -99,14 +99,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
                 className="rounded-md bg-gray-50 border"
               >
                 <CollapsibleTrigger asChild>
-                  <button className="flex items-center space-x-2 py-1 px-2 text-sm text-gray-600 rounded hover:bg-gray-100">
-                    <div className="w-6 h-6 rounded-full bg-muwakkil-purple bg-opacity-10 flex items-center justify-center">
-                      <img
-                        src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
-                        alt="Muwakkil Logo"
-                        className="h-4 w-4"
-                      />
-                    </div>
+                  <button className="flex items-center space-x-2 py-1 px-3 text-sm text-gray-600 rounded hover:bg-gray-100">
                     <span>Action Log</span>
                     {isActionLogOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
                   </button>
