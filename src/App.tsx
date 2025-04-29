@@ -16,6 +16,11 @@ import DisclaimerPage from "./pages/DisclaimerPage";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import NotFound from "./pages/NotFound";
+import ChatBotButton from "./components/ChatBotButton";
+
+// This would come from your authentication system
+// For now, we'll mock it
+const isAuthenticated = true;
 
 const queryClient = new QueryClient();
 
@@ -54,6 +59,8 @@ const App = () => (
           
           <Route path="*" element={<NotFound />} />
         </Routes>
+        {/* Add ChatBot button on all pages */}
+        <ChatBotButton isAuthenticated={isAuthenticated} />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

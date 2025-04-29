@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { useToast } from '@/hooks/use-toast';
 
 export interface Message {
   id: string;
@@ -19,6 +20,7 @@ export const useChat = (chatId: string | null) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
+  const { toast } = useToast();
 
   const handleSendMessage = (message: string) => {
     const newMessage: Message = {
@@ -31,26 +33,56 @@ export const useChat = (chatId: string | null) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
 
     setLoading(true);
+    setActionLogSteps([{ text: 'Analyzing your query...' }]);
 
-    // Simulate AI response after a short delay
+    // Simulate AI response process with more detailed action logs
     setTimeout(() => {
-      const aiResponse: Message = {
-        id: uuidv4(),
-        content: `AI response to: ${message}`,
-        sender: 'ai',
-        timestamp: new Date(),
-      };
-
-      setMessages((prevMessages) => [...prevMessages, aiResponse]);
-      setLoading(false);
-
-      // Simulate action log steps
+      // First update - analyzing
       setActionLogSteps([
-        { text: 'Analyzed user query' },
-        { text: 'Searched knowledge base', source: 'Knowledge Base' },
-        { text: 'Generated response' },
+        { text: 'Analyzing your query...' },
+        { text: 'Searching knowledge base...', source: 'Legal Database' }
       ]);
-    }, 1500);
+      
+      // Second update after a bit - found documents
+      setTimeout(() => {
+        setActionLogSteps([
+          { text: 'Analyzed query', source: 'Legal Database' },
+          { text: 'Found relevant documents', document: 'UAE Corporate Tax Law 2023.pdf' },
+          { text: 'Analyzing document contents...', document: 'UAE Corporate Tax Law 2023.pdf' }
+        ]);
+        
+        // Final update - generating response
+        setTimeout(() => {
+          setActionLogSteps([
+            { text: 'Analyzed query', source: 'Legal Database' },
+            { text: 'Found relevant documents', document: 'UAE Corporate Tax Law 2023.pdf' },
+            { text: 'Analyzed document contents', document: 'UAE Corporate Tax Law 2023.pdf' },
+            { text: 'Generating response based on documents and legal knowledge...' }
+          ]);
+          
+          // Finally, add the AI message
+          setTimeout(() => {
+            const aiResponse: Message = {
+              id: uuidv4(),
+              content: `Based on the UAE Corporate Tax Law of 2023, ${message.toLowerCase().includes('tax') ? 'businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate. Businesses with income below this threshold are subject to a 0% rate.' : 'I found some information that might be relevant to your query. How can I provide more specific assistance?'}`,
+              sender: 'ai',
+              timestamp: new Date(),
+            };
+
+            setMessages((prevMessages) => [...prevMessages, aiResponse]);
+            setLoading(false);
+
+            // Final action log
+            setActionLogSteps([
+              { text: 'Analyzed query', source: 'Legal Database' },
+              { text: 'Found relevant documents', document: 'UAE Corporate Tax Law 2023.pdf' },
+              { text: 'Analyzed document contents', document: 'UAE Corporate Tax Law 2023.pdf' },
+              { text: 'Generated response based on legal knowledge', source: 'Legal Database' }
+            ]);
+          }, 800);
+        }, 1000);
+      }, 1500);
+    }, 800);
   };
 
   const handleFileUpload = (file: File) => {
@@ -60,15 +92,27 @@ export const useChat = (chatId: string | null) => {
       sender: 'user',
       timestamp: new Date(),
     };
+    
     setMessages((prevMessages) => [...prevMessages, newMessage]);
+    
+    toast({
+      title: "File Uploaded",
+      description: `${file.name} has been uploaded successfully.`,
+    });
   };
 
   const handleBookmark = (messageId: string) => {
-    alert(`Bookmarking message with ID: ${messageId}`);
+    toast({
+      title: "Bookmarked",
+      description: "Message has been saved to your bookmarks.",
+    });
   };
 
   const handleFeedback = (type: 'positive' | 'negative') => {
-    alert(`Feedback: ${type}`);
+    toast({
+      title: "Feedback Received",
+      description: `Thank you for your ${type} feedback.`,
+    });
   };
 
   return {
@@ -79,6 +123,6 @@ export const useChat = (chatId: string | null) => {
     handleBookmark,
     handleFeedback,
     actionLogSteps,
-    chatTitle: chatId ? "Eligibility check for DIFC's government grants" : ""
+    chatTitle: chatId ? "Eligibility check for DIFC's government grants" : "New Chat"
   };
 };

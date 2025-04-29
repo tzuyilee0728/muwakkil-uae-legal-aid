@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check, BookmarkCheck } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -35,8 +34,14 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   const handleCopy = () => {
     navigator.clipboard.writeText(content);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
     if (onCopy) onCopy();
+    
+    toast({
+      title: "Copied",
+      description: "Content copied to clipboard",
+    });
+    
+    setTimeout(() => setIsCopied(false), 2000);
   };
 
   const handleBookmark = () => {
@@ -52,33 +57,22 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   return (
     <div className="mt-4 flex items-center space-x-4 text-gray-500">
       <TooltipProvider delayDuration={0}>
-        {/* Copy button */}
+        {/* Copy button - Fixed positioning issue */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
               variant="outline"
               size="icon"
-              className="disabled:opacity-100 border-0"
+              className="relative disabled:opacity-100 border-0 w-8 h-8"
               onClick={handleCopy}
               aria-label={isCopied ? "Copied" : "Copy to clipboard"}
               disabled={isCopied}
             >
-              <div
-                className={cn(
-                  "transition-all",
-                  isCopied ? "scale-100 opacity-100" : "scale-0 opacity-0",
-                )}
-              >
-                <Check className="stroke-emerald-500" size={16} strokeWidth={1.5} aria-hidden="true" />
-              </div>
-              <div
-                className={cn(
-                  "absolute transition-all",
-                  isCopied ? "scale-0 opacity-0" : "scale-100 opacity-100",
-                )}
-              >
-                <Copy size={16} strokeWidth={1.5} aria-hidden="true" />
-              </div>
+              {isCopied ? (
+                <Check className="stroke-emerald-500 absolute inset-0 m-auto" size={16} strokeWidth={1.5} aria-hidden="true" />
+              ) : (
+                <Copy className="absolute inset-0 m-auto" size={16} strokeWidth={1.5} aria-hidden="true" />
+              )}
             </HoverButton>
           </TooltipTrigger>
           <TooltipContent className="px-2 py-1 text-xs">Copy message</TooltipContent>
