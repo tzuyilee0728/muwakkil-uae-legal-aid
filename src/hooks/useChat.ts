@@ -22,16 +22,111 @@ export interface KnowledgeItem {
   filePath?: string;
 }
 
+export interface ChatHistory {
+  id: string;
+  messages: Message[];
+  title?: string;
+}
+
 export const useChat = (chatId: string | null) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
+  const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
   const { toast } = useToast();
+  
+  // Load chat history on mount
+  useEffect(() => {
+    const storedHistory = localStorage.getItem('chatHistory');
+    if (storedHistory) {
+      setChatHistory(JSON.parse(storedHistory));
+    }
+    
+    // If we have a chatId, try to load this specific chat
+    if (chatId) {
+      const storedHistory = localStorage.getItem('chatHistory');
+      if (storedHistory) {
+        const history = JSON.parse(storedHistory) as ChatHistory[];
+        const currentChat = history.find(chat => chat.id === chatId);
+        if (currentChat && currentChat.messages) {
+          setMessages(currentChat.messages);
+        }
+      }
+    }
+  }, [chatId]);
+  
+  // Save chat history when messages change
+  useEffect(() => {
+    if (messages.length > 0) {
+      const currentChatId = chatId || uuidv4();
+      const updatedHistory = [...chatHistory];
+      
+      const existingChatIndex = updatedHistory.findIndex(chat => chat.id === currentChatId);
+      
+      if (existingChatIndex >= 0) {
+        updatedHistory[existingChatIndex].messages = messages;
+      } else {
+        updatedHistory.push({
+          id: currentChatId,
+          messages: messages,
+          title: "New Chat"
+        });
+      }
+      
+      setChatHistory(updatedHistory);
+      localStorage.setItem('chatHistory', JSON.stringify(updatedHistory));
+    }
+  }, [messages]);
   
   // Get knowledge items from localStorage
   const getKnowledgeItems = (): KnowledgeItem[] => {
     const storedItems = localStorage.getItem('knowledgeItems');
     return storedItems ? JSON.parse(storedItems) : [];
+  };
+  
+  // Analyze user's intent based on previous messages
+  const analyzeUserIntent = (newMessage: string): string => {
+    const userMessages = messages
+      .filter(msg => msg.sender === 'user')
+      .map(msg => msg.content);
+    
+    // Add the new message to analyze the full context
+    userMessages.push(newMessage);
+    
+    // Logic to determine user intent based on message history
+    let intent = "general";
+    
+    // Check for follow-up questions
+    if (messages.length > 0 && userMessages.length > 1) {
+      const prevMessage = userMessages[userMessages.length - 2].toLowerCase();
+      const currentMessage = newMessage.toLowerCase();
+      
+      // Check if user is asking for more details about previous topic
+      if (currentMessage.includes("more") || 
+          currentMessage.includes("elaborate") ||
+          currentMessage.includes("explain") ||
+          currentMessage.includes("details")) {
+        intent = "follow-up";
+      }
+      
+      // Check if user is asking about specific tax topics
+      else if (prevMessage.includes("tax") && currentMessage.includes("rate")) {
+        intent = "tax-rate";
+      }
+      
+      // Check if user is asking about documents
+      else if (prevMessage.includes("document") || currentMessage.includes("document")) {
+        intent = "document";
+      }
+    }
+    
+    if (newMessage.toLowerCase().includes("tax")) {
+      intent = "tax";
+    } else if (newMessage.toLowerCase().includes("document") || newMessage.toLowerCase().includes("file")) {
+      intent = "document";
+    }
+    
+    return intent;
   };
 
   const handleSendMessage = (message: string) => {
@@ -50,11 +145,15 @@ export const useChat = (chatId: string | null) => {
     // Get knowledge items to analyze
     const knowledgeItems = getKnowledgeItems();
     
+    // Analyze user intent based on message history
+    const userIntent = analyzeUserIntent(message);
+    
     // Simulate AI response process with knowledge document analysis
     setTimeout(() => {
       // First update - analyzing
       setActionLogSteps([
         { text: 'Analyzing your query...' },
+        { text: 'Analyzing conversation history...', source: 'Chat History' },
         { text: 'Searching knowledge base...', source: 'User Knowledge Base' }
       ]);
       
@@ -62,6 +161,7 @@ export const useChat = (chatId: string | null) => {
       setTimeout(() => {
         const documentLogs: ActionLogStep[] = [
           { text: 'Analyzed query', source: 'Knowledge Base' },
+          { text: 'Analyzed conversation context', source: 'Chat History' },
         ];
         
         // Add each knowledge document to the action log
@@ -94,6 +194,7 @@ export const useChat = (chatId: string | null) => {
         setTimeout(() => {
           const finalLogs: ActionLogStep[] = [
             { text: 'Analyzed query', source: 'Knowledge Base' },
+            { text: 'Analyzed conversation context', source: 'Chat History' },
           ];
           
           // Add each knowledge document to the final action log
@@ -121,7 +222,7 @@ export const useChat = (chatId: string | null) => {
           }
           
           finalLogs.push({ 
-            text: 'Generating response based on documents and knowledge base...', 
+            text: 'Generating response based on documents, knowledge base, and conversation history...', 
           });
           
           setActionLogSteps(finalLogs);
@@ -130,18 +231,31 @@ export const useChat = (chatId: string | null) => {
           setTimeout(() => {
             let responseContent = '';
             
-            if (knowledgeItems.length > 0) {
-              // Generate response based on the knowledge items
-              if (message.toLowerCase().includes('tax')) {
-                responseContent = `Based on the analysis of your uploaded documents (${knowledgeItems.map(item => item.name).join(', ')}), businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate in UAE. Businesses with income below this threshold are subject to a 0% rate.`;
-              } else if (message.toLowerCase().includes('document') || message.toLowerCase().includes('file')) {
-                responseContent = `I've analyzed your uploaded documents (${knowledgeItems.map(item => item.name).join(', ')}). These documents contain information about ${knowledgeItems.length > 1 ? 'various topics' : 'the topic you mentioned'}. How can I help you understand them better?`;
+            // Generate response based on user intent and knowledge items
+            if (userIntent === 'follow-up' && messages.length > 0) {
+              // This is a follow-up question, reference previous content
+              responseContent = `Based on our previous conversation and your follow-up question, I can provide more details. ${getFollowUpResponse(message, knowledgeItems)}`;
+            } else if (userIntent === 'tax') {
+              if (knowledgeItems.length > 0) {
+                responseContent = `Based on the analysis of your uploaded documents (${knowledgeItems.map(item => item.name).join(', ')}) and our conversation history, businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate in UAE. Businesses with income below this threshold are subject to a 0% rate.`;
               } else {
-                responseContent = `I've analyzed your query against your uploaded knowledge documents (${knowledgeItems.map(item => item.name).join(', ')}). Based on this analysis, I can provide you with information relevant to your question. What specific aspects would you like me to elaborate on?`;
+                responseContent = `Based on the UAE Corporate Tax Law of 2023, businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate. Businesses with income below this threshold are subject to a 0% rate. Your previous questions help me understand you're interested in specific tax implications.`;
+              }
+            } else if (userIntent === 'tax-rate') {
+              responseContent = `Following up on our previous tax discussion, the standard corporate tax rate in the UAE is 9% for businesses with taxable income above AED 375,000. Small businesses and startups with income below this threshold benefit from a 0% rate. There are also specific provisions for free zone businesses that meet certain conditions.`;
+            } else if (userIntent === 'document') {
+              if (knowledgeItems.length > 0) {
+                responseContent = `I've analyzed your uploaded documents (${knowledgeItems.map(item => item.name).join(', ')}) in the context of our ongoing conversation. These documents contain information about ${knowledgeItems.length > 1 ? 'various topics' : 'the topic you mentioned'}. Would you like me to elaborate on any specific aspect from these documents?`;
+              } else {
+                responseContent = `Based on our conversation history, I understand you're interested in document analysis. To provide you with the most accurate information, I recommend uploading the relevant documents to your knowledge base. This will allow me to analyze them directly.`;
               }
             } else {
-              // Default response if no knowledge items
-              responseContent = `Based on the UAE Corporate Tax Law of 2023, ${message.toLowerCase().includes('tax') ? 'businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate. Businesses with income below this threshold are subject to a 0% rate.' : 'I found some information that might be relevant to your query. How can I provide more specific assistance?'}`;
+              // Default response for general queries
+              if (knowledgeItems.length > 0) {
+                responseContent = `I've analyzed your query against your uploaded knowledge documents (${knowledgeItems.map(item => item.name).join(', ')}) and considered our previous conversation. Based on this comprehensive analysis, I can provide you with information relevant to your question. What specific aspects would you like me to elaborate on?`;
+              } else {
+                responseContent = `Based on our conversation history and available information, ${message.toLowerCase().includes('tax') ? 'businesses with taxable income over AED 375,000 are subject to a 9% corporate tax rate. Businesses with income below this threshold are subject to a 0% rate.' : 'I found some information that might be relevant to your query. How can I provide more specific assistance?'}`;
+              }
             }
             
             const aiResponse: Message = {
@@ -157,7 +271,7 @@ export const useChat = (chatId: string | null) => {
             // Final action log
             const completeLogs = [...finalLogs];
             completeLogs.push({ 
-              text: 'Generated response based on document analysis', 
+              text: 'Generated response based on document analysis and conversation history', 
               source: knowledgeItems.length > 0 ? 'User Knowledge Base' : 'Legal Database'
             });
             setActionLogSteps(completeLogs);
@@ -165,6 +279,17 @@ export const useChat = (chatId: string | null) => {
         }, 1000);
       }, 1500);
     }, 800);
+  };
+
+  // Helper function to generate follow-up responses
+  const getFollowUpResponse = (message: string, knowledgeItems: KnowledgeItem[]): string => {
+    if (message.toLowerCase().includes('tax')) {
+      return `Regarding the tax aspects, UAE's corporate tax framework was established in 2022 and implemented in 2023. It features a standard rate of 9% for businesses earning above AED 375,000, with qualifying free zone businesses potentially eligible for 0% rates subject to specific conditions.`;
+    } else if (message.toLowerCase().includes('document') || message.toLowerCase().includes('file')) {
+      return `Let me provide more insights from ${knowledgeItems.length > 0 ? 'your uploaded documents' : 'the reference documents'}. The key provisions relevant to your inquiry include regulatory frameworks, compliance requirements, and specific provisions applicable to your situation.`;
+    } else {
+      return `Looking at the broader context of our discussion, I can elaborate further on the relevant aspects. The regulatory framework in UAE provides specific guidelines that would apply to your situation, considering all factors we've discussed.`;
+    }
   };
 
   const handleFileUpload = (file: File) => {

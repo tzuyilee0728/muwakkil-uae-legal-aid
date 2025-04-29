@@ -71,59 +71,78 @@ const KnowledgePage: React.FC = () => {
   return (
     <div className="flex-1 overflow-auto p-6">
       <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <div>
-            <h1 className="text-2xl font-semibold">Knowledge</h1>
-            <p className="text-gray-500">Knowledge help Waha understand the context of your question.</p>
-          </div>
-          <button
-            onClick={() => setShowAddModal(true)}
-            className="bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-50"
-          >
-            <Plus size={24} />
-          </button>
-        </div>
-
-        {/* Knowledge items */}
-        <div className="space-y-4">
-          {items.map((item) => (
-            <div 
-              key={item.id} 
-              className="bg-white rounded-lg border border-gray-200 p-4 flex items-center justify-between"
-            >
-              <div className="flex items-center">
-                <div className="w-10 h-12 bg-gray-100 rounded flex items-center justify-center mr-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </div>
-                <span>{item.name}</span>
+        {items.length > 0 ? (
+          <>
+            <div className="flex justify-between items-center mb-6">
+              <div>
+                <h1 className="text-2xl font-semibold">Knowledge</h1>
+                <p className="text-gray-500 dark:text-gray-400">Knowledge help Waha understand the context of your question.</p>
               </div>
               <button
-                onClick={() => handleDeleteItem(item.id)}
-                className="text-gray-400 hover:text-red-500"
+                onClick={() => setShowAddModal(true)}
+                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full p-2 hover:bg-gray-50 dark:hover:bg-gray-700"
               >
-                <Trash2 size={20} />
+                <Plus size={24} />
               </button>
             </div>
-          ))}
 
-          {items.length === 0 && (
-            <div className="text-center py-12 text-gray-500">
-              No knowledge items added yet. Add your first document or note.
+            {/* Knowledge items */}
+            <div className="space-y-4">
+              {items.map((item) => (
+                <div 
+                  key={item.id} 
+                  className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 flex items-center justify-between"
+                >
+                  <div className="flex items-center">
+                    <div className="w-10 h-12 bg-gray-100 dark:bg-gray-700 rounded flex items-center justify-center mr-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                      </svg>
+                    </div>
+                    <span className="dark:text-gray-200">{item.name}</span>
+                  </div>
+                  <button
+                    onClick={() => handleDeleteItem(item.id)}
+                    className="text-gray-400 hover:text-red-500 dark:text-gray-500 dark:hover:text-red-400"
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </div>
+              ))}
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <div className="flex flex-col items-center justify-center h-64">
+            <div className="mb-4 text-gray-500 dark:text-gray-400">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h2 className="text-xl font-medium mb-2">No Knowledge Items Yet</h2>
+            <p className="text-gray-500 dark:text-gray-400 text-center mb-6">Add documents to help Waha understand your context better</p>
+            <button 
+              onClick={() => setShowAddModal(true)}
+              className="flex items-center px-4 py-2 bg-muwakkil-purple text-white rounded-md hover:bg-purple-600"
+            >
+              <Plus size={18} className="mr-2" />
+              <span>Add Knowledge</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Add Knowledge Modal */}
       {showAddModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg w-full max-w-md">
+          <div className="bg-white dark:bg-gray-800 rounded-lg w-full max-w-md">
             <div className="p-6">
               <h2 className="text-xl font-semibold mb-4">Add Knowledge</h2>
               
@@ -131,14 +150,14 @@ const KnowledgePage: React.FC = () => {
                 <textarea
                   value={knowledgeText}
                   onChange={(e) => setKnowledgeText(e.target.value)}
-                  className="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-muwakkil-purple"
+                  className="w-full h-40 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-muwakkil-purple dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                   placeholder="Add something..."
                 ></textarea>
               </div>
               
               <div className="mb-6">
                 <button 
-                  className="flex items-center px-4 py-2 border border-gray-300 rounded-md"
+                  className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md dark:bg-gray-700"
                   onClick={() => document.getElementById('file-upload')?.click()}
                 >
                   <span>Upload</span>
@@ -155,7 +174,7 @@ const KnowledgePage: React.FC = () => {
                   />
                 </button>
                 {selectedFile && (
-                  <div className="mt-2 text-sm text-gray-600">
+                  <div className="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     Selected: {selectedFile.name}
                   </div>
                 )}
@@ -164,7 +183,7 @@ const KnowledgePage: React.FC = () => {
               <div className="flex justify-end space-x-2">
                 <button 
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700"
                 >
                   Cancel
                 </button>

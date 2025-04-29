@@ -120,3 +120,8 @@
 .action-log-content.expanded {
   max-height: 500px;
 }
+
+/* Global text styling for theme consistency */
+p, h1, h2, h3, h4, h5, h6, span, button, a, div {
+  @apply text-foreground dark:text-foreground;
+}
