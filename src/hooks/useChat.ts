@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '@/hooks/use-toast';
+import { useBookmarkStore } from '../services/bookmarkService';
 
 export interface Message {
   id: string;
@@ -34,6 +34,7 @@ export const useChat = (chatId: string | null) => {
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
   const { toast } = useToast();
+  const { addBookmark } = useBookmarkStore();
   
   // Load chat history on mount
   useEffect(() => {
@@ -309,10 +310,30 @@ export const useChat = (chatId: string | null) => {
   };
 
   const handleBookmark = (messageId: string) => {
-    toast({
-      title: "Bookmarked",
-      description: "Message has been saved to your bookmarks.",
-    });
+    // Find the message with the given ID
+    const messageToBookmark = messages.find(msg => msg.id === messageId);
+    
+    if (messageToBookmark) {
+      // Format the date for display
+      const formattedDate = new Date(messageToBookmark.timestamp).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+      
+      // Add the message to bookmarks
+      addBookmark({
+        id: messageToBookmark.id,
+        title: chatTitle || "New Chat",
+        date: formattedDate,
+        content: messageToBookmark.content
+      });
+      
+      toast({
+        title: "Bookmarked",
+        description: "Message has been saved to your bookmarks.",
+      });
+    }
   };
 
   const handleFeedback = (type: 'positive' | 'negative') => {

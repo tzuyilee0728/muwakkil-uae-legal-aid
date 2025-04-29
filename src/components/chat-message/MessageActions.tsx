@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check, BookmarkCheck } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { HoverButton } from "@/components/ui/hover-button";
@@ -31,6 +31,11 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   const [isCopied, setIsCopied] = useState(false);
   const [bookmarked, setBookmarked] = useState(isBookmarked);
   const { toast } = useToast();
+  
+  // Update the bookmarked state when the isBookmarked prop changes
+  useEffect(() => {
+    setBookmarked(isBookmarked);
+  }, [isBookmarked]);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(content);
@@ -46,13 +51,10 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   };
 
   const handleBookmark = () => {
-    setBookmarked(true);
-    if (onBookmark) onBookmark();
-    
-    toast({
-      title: "Bookmarked",
-      description: "This message has been saved to your bookmarks.",
-    });
+    if (!bookmarked) {
+      setBookmarked(true);
+      if (onBookmark) onBookmark();
+    }
   };
 
   return (

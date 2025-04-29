@@ -2,6 +2,7 @@
 import React from 'react';
 import UserMessage from './chat-message/UserMessage';
 import AIMessage from './chat-message/AIMessage';
+import { useBookmarkStore } from '../services/bookmarkService';
 
 interface ChatMessageProps {
   message: {
@@ -29,6 +30,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   onRegenerateResponse,
   onFeedback,
 }) => {
+  const { bookmarks } = useBookmarkStore();
+  const isAlreadyBookmarked = bookmarks.some(bookmark => bookmark.id === message.id);
+  
   if (message.sender === 'user') {
     return <UserMessage content={message.content} />;
   }
@@ -41,6 +45,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
       onCopy={onCopy}
       onRegenerateResponse={onRegenerateResponse}
       onFeedback={onFeedback}
+      isBookmarked={isAlreadyBookmarked}
     />
   );
 };
