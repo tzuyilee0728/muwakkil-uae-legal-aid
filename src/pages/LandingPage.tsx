@@ -10,11 +10,6 @@ const LandingPage: React.FC = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Logo />
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-700 hover:text-[#855ECB]">Home</a>
-              <a href="#" className="text-gray-700 hover:text-[#855ECB]">Pricing</a>
-              <a href="#" className="text-gray-700 hover:text-[#855ECB]">About</a>
-            </nav>
             <div className="flex items-center space-x-4">
               <Link to="/login" className="text-gray-700 hover:text-[#855ECB]">Login</Link>
               <Link to="/signup" className="bg-[#855ECB] hover:bg-purple-600 text-white px-4 py-2 rounded-md">
