@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
@@ -19,15 +18,6 @@ const KnowledgePage: React.FC = () => {
     const storedItems = localStorage.getItem('knowledgeItems');
     if (storedItems) {
       setItems(JSON.parse(storedItems));
-    } else {
-      // If no items found, set a default item
-      const defaultItem = { 
-        id: '1', 
-        name: 'Nakhla\'s_company_document_Dubai.pdf',
-        filePath: '/path/to/document.pdf'
-      };
-      setItems([defaultItem]);
-      localStorage.setItem('knowledgeItems', JSON.stringify([defaultItem]));
     }
   }, []);
 
