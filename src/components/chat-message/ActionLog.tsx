@@ -24,10 +24,10 @@ const ActionLog: React.FC<ActionLogProps> = ({ steps }) => {
       <Collapsible
         open={isOpen}
         onOpenChange={setIsOpen}
-        className="rounded-md bg-gray-50 border w-full"
+        className="rounded-md bg-muted dark:bg-accent border w-full"
       >
         <CollapsibleTrigger asChild>
-          <button className="flex items-center space-x-2 py-1 px-3 text-sm text-gray-600 rounded hover:bg-gray-100 w-full">
+          <button className="flex items-center space-x-2 py-1 px-3 text-sm text-gray-600 dark:text-muted-foreground rounded hover:bg-gray-100 dark:hover:bg-muted w-full">
             <span>Action Log</span>
             {isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </button>
@@ -45,21 +45,21 @@ const ActionLog: React.FC<ActionLogProps> = ({ steps }) => {
                         </svg>
                       </div>
                     ) : (
-                      <div className="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
+                      <div className="w-5 h-5 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center mr-2 flex-shrink-0 mt-0.5">
                         {index + 1}
                       </div>
                     )}
-                    <p className="text-sm break-normal">{step.text}</p>
+                    <p className="text-sm break-normal dark:text-foreground">{step.text}</p>
                   </div>
                   
                   {step.source && (
-                    <div className="ml-7 text-xs text-gray-500 break-words">
+                    <div className="ml-7 text-xs text-gray-500 dark:text-gray-400 break-words">
                       {step.source}
                     </div>
                   )}
                   
                   {step.document && (
-                    <div className="ml-7 text-xs text-muwakkil-purple cursor-pointer break-words">
+                    <div className="ml-7 text-xs text-muwakkil-purple dark:text-primary cursor-pointer break-words">
                       {step.document}
                     </div>
                   )}

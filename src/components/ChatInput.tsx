@@ -25,10 +25,10 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4 bg-white">
-      <div className="flex items-center bg-gray-50 rounded-md border border-gray-200">
-        <label htmlFor="file-upload" className="p-3 hover:bg-gray-100 rounded-l-md cursor-pointer">
-          <Upload size={20} className="text-gray-500" />
+    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background">
+      <div className="flex items-center bg-muted dark:bg-accent rounded-md border border-gray-200 dark:border-gray-700">
+        <label htmlFor="file-upload" className="p-3 hover:bg-gray-100 dark:hover:bg-muted rounded-l-md cursor-pointer">
+          <Upload size={20} className="text-gray-500 dark:text-gray-400" />
           <input
             id="file-upload"
             type="file"
@@ -41,17 +41,17 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Ask anything..."
-          className="flex-1 py-3 px-4 bg-transparent outline-none"
+          className="flex-1 py-3 px-4 bg-transparent outline-none text-foreground dark:text-foreground"
         />
         <button 
           type="button"
-          className="p-3 hover:bg-gray-100 text-gray-500"
+          className="p-3 hover:bg-gray-100 dark:hover:bg-muted text-gray-500 dark:text-gray-400"
         >
           <Mic size={20} />
         </button>
         <button 
           type="submit"
-          className="p-3 ml-1 text-purple-600 hover:bg-gray-100"
+          className="p-3 ml-1 text-purple-600 dark:text-primary hover:bg-gray-100 dark:hover:bg-muted"
         >
           {message.trim() ? (
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

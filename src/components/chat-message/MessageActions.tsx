@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check, BookmarkCheck } from 'lucide-react';
 import { cn } from "@/lib/utils";
@@ -55,7 +56,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   };
 
   return (
-    <div className="mt-4 flex items-center space-x-4 text-gray-500">
+    <div className="mt-4 flex items-center space-x-4 text-gray-500 dark:text-gray-400">
       <TooltipProvider delayDuration={0}>
         {/* Copy button - Fixed positioning issue */}
         <Tooltip>
@@ -138,7 +139,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
               disabled={bookmarked}
             >
               {bookmarked ? (
-                <BookmarkCheck size={16} strokeWidth={1.5} className="text-muwakkil-purple" />
+                <BookmarkCheck size={16} strokeWidth={1.5} className="text-muwakkil-purple dark:text-primary" />
               ) : (
                 <Bookmark size={16} strokeWidth={1.5} />
               )}

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ActionLog from './ActionLog';
 import FormattedContent from './FormattedContent';
@@ -27,7 +28,7 @@ const AIMessage: React.FC<AIMessageProps> = ({
   onFeedback
 }) => {
   return (
-    <div className="py-6 bg-gray-50">
+    <div className="py-6 bg-muted dark:bg-accent">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex flex-col w-full">
           {/* Action Log component - keep at the top */}
@@ -38,7 +39,7 @@ const AIMessage: React.FC<AIMessageProps> = ({
           )}
           
           {/* Content now aligned to the left */}
-          <div className="w-full">
+          <div className="w-full text-foreground dark:text-foreground">
             <FormattedContent content={content} />
             
             <MessageActions 
