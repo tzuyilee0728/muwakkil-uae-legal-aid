@@ -1,7 +1,7 @@
 
 import React from 'react';
 import ChatMessage from '../ChatMessage';
-import { Message, ActionLogStep } from '../../hooks/useChat';
+import { Message, ActionLogStep } from '../../types/chat';
 
 interface ChatContainerProps {
   messages: Message[];

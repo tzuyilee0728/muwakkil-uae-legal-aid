@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '@/hooks/use-toast';
@@ -12,7 +11,8 @@ import {
 } from '../services/chatHistoryService';
 import { simulateAIResponse } from '../services/messageResponseService';
 
-export { Message, ActionLogStep } from '../types/chat';
+// Change to export type for TypeScript with isolatedModules
+export type { Message, ActionLogStep } from '../types/chat';
 
 export const useChat = (chatId: string | null) => {
   const [messages, setMessages] = useState<Message[]>([]);
