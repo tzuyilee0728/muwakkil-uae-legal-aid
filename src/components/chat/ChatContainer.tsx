@@ -1,20 +1,18 @@
 
 import React from 'react';
 import ChatMessage from '../ChatMessage';
-import ActionLog from '../ActionLog';
+import { Message } from '@/hooks/useChat';
+
+interface ActionLogStep {
+  text: string;
+  source?: string;
+  document?: string;
+}
 
 interface ChatContainerProps {
-  messages: Array<{
-    id: string;
-    content: string;
-    sender: 'user' | 'ai';
-  }>;
+  messages: Message[];
   loading: boolean;
-  actionLogSteps?: Array<{
-    text: string;
-    source?: string;
-    document?: string;
-  }>;
+  actionLogSteps?: ActionLogStep[];
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ 
@@ -28,6 +26,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         <ChatMessage 
           key={message.id}
           message={message}
+          actionLogSteps={message.sender === 'ai' ? actionLogSteps : []}
           onBookmark={() => console.log('Bookmark', message.id)}
           onCopy={() => console.log('Copy', message.id)}
           onRegenerateResponse={() => console.log('Regenerate', message.id)}
@@ -44,13 +43,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
               <div className="animate-pulse">●</div>
             </div>
           </div>
-        </div>
-      )}
-      
-      {/* Show action log if there are AI messages */}
-      {messages.some(m => m.sender === 'ai') && !loading && actionLogSteps.length > 0 && (
-        <div className="max-w-4xl mx-auto px-4">
-          <ActionLog steps={actionLogSteps} />
         </div>
       )}
     </div>

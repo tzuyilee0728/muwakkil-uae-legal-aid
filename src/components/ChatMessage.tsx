@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check, ChevronRight, ChevronDown } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { HoverButton } from "@/components/ui/hover-button";
 import {
@@ -10,6 +10,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Avatar } from "@/components/ui/avatar";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ChatMessageProps {
   message: {
@@ -18,6 +20,11 @@ interface ChatMessageProps {
     sender: 'user' | 'ai';
     timestamp?: string;
   };
+  actionLogSteps?: Array<{
+    text: string;
+    source?: string;
+    document?: string;
+  }>;
   onBookmark?: () => void;
   onCopy?: () => void;
   onRegenerateResponse?: () => void;
@@ -26,12 +33,14 @@ interface ChatMessageProps {
 
 const ChatMessage: React.FC<ChatMessageProps> = ({
   message,
+  actionLogSteps = [],
   onBookmark,
   onCopy,
   onRegenerateResponse,
   onFeedback,
 }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [isActionLogOpen, setIsActionLogOpen] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(message.content);
@@ -80,6 +89,68 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
               />
             </Avatar>
           </div>
+          
+          {/* Action Log (Only show if there are steps) */}
+          {actionLogSteps.length > 0 && (
+            <div className="flex-shrink-0">
+              <Collapsible
+                open={isActionLogOpen}
+                onOpenChange={setIsActionLogOpen}
+                className="rounded-md bg-gray-50 border"
+              >
+                <CollapsibleTrigger asChild>
+                  <button className="flex items-center space-x-2 py-1 px-2 text-sm text-gray-600 rounded hover:bg-gray-100">
+                    <div className="w-6 h-6 rounded-full bg-muwakkil-purple bg-opacity-10 flex items-center justify-center">
+                      <img
+                        src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
+                        alt="Muwakkil Logo"
+                        className="h-4 w-4"
+                      />
+                    </div>
+                    <span>Action Log</span>
+                    {isActionLogOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                  </button>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <ScrollArea className="h-[200px] w-[250px]">
+                    <div className="p-3 border-t">
+                      {actionLogSteps.map((step, index) => (
+                        <div key={index} className="mb-3 last:mb-0">
+                          <div className="flex items-center mb-1">
+                            {step.document ? (
+                              <div className="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                              </div>
+                            ) : (
+                              <div className="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center mr-2">
+                                {index + 1}
+                              </div>
+                            )}
+                            <p className="text-sm">{step.text}</p>
+                          </div>
+                          
+                          {step.source && (
+                            <div className="ml-7 text-xs text-gray-500">
+                              {step.source}
+                            </div>
+                          )}
+                          
+                          {step.document && (
+                            <div className="ml-7 text-xs text-muwakkil-purple cursor-pointer">
+                              {step.document}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </CollapsibleContent>
+              </Collapsible>
+            </div>
+          )}
+          
           <div className="flex-grow">
             <div className="prose prose-sm max-w-none">
               {formattedContent}
