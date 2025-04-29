@@ -15,11 +15,10 @@ const ChatPage: React.FC = () => {
     handleSendMessage, 
     handleFileUpload, 
     actionLogSteps,
-    isNewChat 
   } = useChat(id);
 
-  // If this is a new chat and we have no messages, show prompt suggestions
-  if (isNewChat && messages.length === 0) {
+  // Always show prompt suggestions if we have no messages
+  if (messages.length === 0) {
     return (
       <div className="flex-1 flex flex-col overflow-hidden">
         <ChatPromptSuggestions onSelectPrompt={handleSendMessage} />

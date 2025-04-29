@@ -40,6 +40,7 @@ const App = () => (
           {/* App routes - protected in a real app */}
           <Route path="/app" element={<AppLayout />}>
             <Route index element={<ChatPage />} />
+            <Route path="chat" element={<ChatPage />} />
             <Route path="chat/:id" element={<ChatPage />} />
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="bookmarks" element={<BookmarksPage />} />
