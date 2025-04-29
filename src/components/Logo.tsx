@@ -6,7 +6,7 @@ const Logo: React.FC = () => {
   return (
     <Link to="/" className="flex items-center space-x-2">
       <img 
-        src="/lovable-uploads/2b6cd56f-db3c-4d1c-b6af-a9f5a8adfe1f.png"
+        src="/lovable-uploads/806d53db-5eca-4dde-8bc0-159233621293.png"
         alt="Muwakkil Logo" 
         className="h-8 w-auto"
       />

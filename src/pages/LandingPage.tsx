@@ -1,6 +1,6 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from '../components/Logo';
 
 const LandingPage: React.FC = () => {
   return (
@@ -9,25 +9,15 @@ const LandingPage: React.FC = () => {
       <header className="bg-white border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <div className="w-10 h-10 rounded-md bg-gradient-to-br from-muwakkil-purple to-purple-400 flex items-center justify-center text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3.34 17a10 10 0 1 1 17.32 0"></path>
-                  <path d="M3 21h18"></path>
-                  <path d="M12 7v4"></path>
-                  <path d="M12 15h.01"></path>
-                </svg>
-              </div>
-              <span className="ml-3 font-bold text-xl">Muwakkil</span>
-            </div>
+            <Logo />
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-700 hover:text-muwakkil-purple">Home</a>
-              <a href="#" className="text-gray-700 hover:text-muwakkil-purple">Pricing</a>
-              <a href="#" className="text-gray-700 hover:text-muwakkil-purple">About</a>
+              <a href="#" className="text-gray-700 hover:text-[#855ECB]">Home</a>
+              <a href="#" className="text-gray-700 hover:text-[#855ECB]">Pricing</a>
+              <a href="#" className="text-gray-700 hover:text-[#855ECB]">About</a>
             </nav>
             <div className="flex items-center space-x-4">
-              <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple">Login</Link>
-              <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
+              <Link to="/login" className="text-gray-700 hover:text-[#855ECB]">Login</Link>
+              <Link to="/signup" className="bg-[#855ECB] hover:bg-purple-600 text-white px-4 py-2 rounded-md">
                 Sign Up
               </Link>
             </div>
@@ -123,14 +113,11 @@ const LandingPage: React.FC = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center mb-4">
-              <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center text-muwakkil-purple">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M3.34 17a10 10 0 1 1 17.32 0"></path>
-                  <path d="M3 21h18"></path>
-                  <path d="M12 7v4"></path>
-                  <path d="M12 15h.01"></path>
-                </svg>
-              </div>
+              <img 
+                src="/lovable-uploads/806d53db-5eca-4dde-8bc0-159233621293.png"
+                alt="Muwakkil Logo"
+                className="h-8 w-auto bg-white rounded-md p-1"
+              />
               <span className="ml-2 font-bold text-lg">Muwakkil</span>
             </div>
             <p className="text-gray-400">
