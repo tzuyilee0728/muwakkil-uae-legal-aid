@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
 
 interface KnowledgeItem {
@@ -9,30 +9,47 @@ interface KnowledgeItem {
 }
 
 const KnowledgePage: React.FC = () => {
-  const [items, setItems] = useState<KnowledgeItem[]>([
-    { 
-      id: '1', 
-      name: 'Nakhla\'s_company_document_Dubai.pdf',
-      filePath: '/path/to/document.pdf'
-    }
-  ]);
+  const [items, setItems] = useState<KnowledgeItem[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
   const [knowledgeText, setKnowledgeText] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  // Load items from localStorage on component mount
+  useEffect(() => {
+    const storedItems = localStorage.getItem('knowledgeItems');
+    if (storedItems) {
+      setItems(JSON.parse(storedItems));
+    } else {
+      // If no items found, set a default item
+      const defaultItem = { 
+        id: '1', 
+        name: 'Nakhla\'s_company_document_Dubai.pdf',
+        filePath: '/path/to/document.pdf'
+      };
+      setItems([defaultItem]);
+      localStorage.setItem('knowledgeItems', JSON.stringify([defaultItem]));
+    }
+  }, []);
+
+  // Save items to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('knowledgeItems', JSON.stringify(items));
+  }, [items]);
+
   const handleAddKnowledge = () => {
-    // In a real app, this would upload the file or save the text to the server
     if (selectedFile) {
-      setItems([...items, { 
+      const newItem = { 
         id: Date.now().toString(), 
         name: selectedFile.name,
         filePath: URL.createObjectURL(selectedFile)
-      }]);
+      };
+      setItems([...items, newItem]);
     } else if (knowledgeText) {
-      setItems([...items, { 
+      const newItem = { 
         id: Date.now().toString(), 
         name: `Knowledge ${items.length + 1}`,
-      }]);
+      };
+      setItems([...items, newItem]);
     }
     
     setShowAddModal(false);
@@ -41,7 +58,8 @@ const KnowledgePage: React.FC = () => {
   };
 
   const handleDeleteItem = (id: string) => {
-    setItems(items.filter(item => item.id !== id));
+    const updatedItems = items.filter(item => item.id !== id);
+    setItems(updatedItems);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
