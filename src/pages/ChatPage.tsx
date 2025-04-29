@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ChatInput from '../components/ChatInput';
@@ -80,7 +79,6 @@ const ChatPage: React.FC = () => {
     }, 3000);
   };
 
-  // Function to generate mock responses based on message content
   const getResponseForMessage = (message: string) => {
     if (message.toLowerCase().includes('grant') || message.toLowerCase().includes('eligible')) {
       return "Thank you for providing the necessary information.\n\nAfter reviewing your company's profile, I am pleased to confirm that your startup appears to meet the general eligibility criteria for DIFC government grants and innovation support programs.\n\nSpecifically:\n• Industry Alignment: Your company operates within a priority sector recognized by DIFC (e.g., FinTech, LegalTech, HealthTech, etc.).\n• Business Stage: Your company's growth stage and innovation profile align well with DIFC's target demographic for grants and startup support.\n• Registration Status: You either maintain an existing presence within the DIFC or are in the process of formal registration, fulfilling a key prerequisite for grant consideration.\n• Compliance Readiness: Based on the information provided, your company is positioned to meet DIFC's regulatory compliance requirements, including data protection, governance standards, and beneficial ownership disclosure.\n\nNext Recommended Actions:\n1. Formal Grant Application: Proceed with submitting a formal application for the specific DIFC grant program(s) aligned with your sector and business objectives.\n2. Supporting Documents Preparation: Ensure you have a complete package of required documentation, including a detailed business plan, financial projections, a company profile, and proof of DIFC registration or licensing application.\n3. Engagement with DIFC Innovation Hub: I recommend contacting the DIFC Innovation Hub directly or applying through the DIFC Innovation Hub Portal to initiate the process.\n\nImportant Note:\nFinal eligibility and grant approval are subject to DIFC's internal review processes, and additional documentation or interviews may be required during evaluation.\nIf you would like, I can also assist you in preparing a tailored checklist of documents and a draft application package to maximize your success.";
