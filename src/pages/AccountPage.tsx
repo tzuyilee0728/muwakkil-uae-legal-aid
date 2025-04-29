@@ -4,7 +4,6 @@ import { User, Settings, LogOut, Bell, Shield, Upload, Check } from 'lucide-reac
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
@@ -193,34 +192,6 @@ const AccountPage: React.FC = () => {
               <button className="px-4 py-2 bg-muwakkil-purple text-white rounded-md hover:bg-purple-600">
                 Upgrade to Pro
               </button>
-            </div>
-          </div>
-          
-          {/* Notification Settings */}
-          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
-            <h3 className="text-lg font-medium mb-4 dark:text-white">Notifications</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium dark:text-white">Email Notifications</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Receive notifications via email</p>
-                </div>
-                <Switch 
-                  checked={profile.notifications.email} 
-                  onCheckedChange={(checked) => handleNotificationChange('email', checked)}
-                />
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium dark:text-white">Push Notifications</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Receive notifications on your browser</p>
-                </div>
-                <Switch 
-                  checked={profile.notifications.push}
-                  onCheckedChange={(checked) => handleNotificationChange('push', checked)} 
-                />
-              </div>
             </div>
           </div>
           
