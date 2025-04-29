@@ -141,7 +141,7 @@ const DisclaimerPage: React.FC = () => {
             </Button>
             <Button 
               onClick={handleAgree} 
-              className="flex-1 bg-purple-600 hover:bg-purple-700"
+              className={`flex-1 ${agreed ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-400 hover:bg-gray-500'}`}
               disabled={!agreed}
             >
               I Agree
