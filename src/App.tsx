@@ -1,9 +1,19 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import LandingPage from "./pages/LandingPage";
+import ChatPage from "./pages/ChatPage";
+import KnowledgePage from "./pages/KnowledgePage";
+import BookmarksPage from "./pages/BookmarksPage";
+import AccountPage from "./pages/AccountPage";
+import FindLawyerPage from "./pages/FindLawyerPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import AppLayout from "./layouts/AppLayout";
+import AuthLayout from "./layouts/AuthLayout";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -15,8 +25,24 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/" element={<LandingPage />} />
+          
+          {/* Auth routes */}
+          <Route element={<AuthLayout />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
+          
+          {/* App routes - protected in a real app */}
+          <Route path="/app" element={<AppLayout />}>
+            <Route index element={<ChatPage />} />
+            <Route path="chat/:id" element={<ChatPage />} />
+            <Route path="knowledge" element={<KnowledgePage />} />
+            <Route path="bookmarks" element={<BookmarksPage />} />
+            <Route path="account" element={<AccountPage />} />
+            <Route path="find-lawyer" element={<FindLawyerPage />} />
+          </Route>
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
