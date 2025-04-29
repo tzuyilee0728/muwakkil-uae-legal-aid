@@ -19,13 +19,13 @@ const PromptSuggestion: React.FC<PromptSuggestionProps> = ({
       <div className="mb-4">
         {icon}
       </div>
-      <h3 className="text-lg font-medium mb-4">{title}</h3>
+      <h3 className="text-lg font-medium mb-4 text-foreground dark:text-foreground">{title}</h3>
       <div className="w-full space-y-2">
         {examples.map((example, i) => (
           <button
             key={i}
             onClick={() => onSelect(example)}
-            className="w-full p-4 text-left border border-gray-200 rounded-md bg-white hover:bg-gray-50 transition-colors"
+            className="w-full p-4 text-left border border-border rounded-md bg-background dark:bg-sidebar-accent text-foreground dark:text-foreground hover:bg-muted dark:hover:bg-sidebar-border transition-colors"
           >
             {example}
           </button>

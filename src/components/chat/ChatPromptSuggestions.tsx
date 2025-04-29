@@ -30,7 +30,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
           <PromptSuggestion
             title="Professional Consultation"
             icon={
-              <div className="w-16 h-16 rounded-md bg-muwakkil-light flex items-center justify-center">
+              <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
@@ -43,7 +43,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
           <PromptSuggestion
             title="Examine Documents"
             icon={
-              <div className="w-16 h-16 rounded-md bg-muwakkil-light flex items-center justify-center">
+              <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                   <polyline points="14 2 14 8 20 8"></polyline>
@@ -60,7 +60,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
           <PromptSuggestion
             title="Create Documents"
             icon={
-              <div className="w-16 h-16 rounded-md bg-muwakkil-light flex items-center justify-center">
+              <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 11 12 14 22 4"></polyline>
                   <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
