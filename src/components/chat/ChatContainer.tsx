@@ -1,7 +1,8 @@
+
 import React from 'react';
 import ChatMessage from '../ChatMessage';
-import { Message } from '../../hooks/useChat';
-import { ActionLogStep } from '../../hooks/useChat';
+import { Message, ActionLogStep } from '../../hooks/useChat';
+
 interface ChatContainerProps {
   messages: Message[];
   loading?: boolean;
@@ -9,6 +10,7 @@ interface ChatContainerProps {
   onBookmark?: (messageId: string) => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
 }
+
 const ChatContainer: React.FC<ChatContainerProps> = ({
   messages,
   loading = false,
@@ -32,4 +34,5 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
         </div>}
     </div>;
 };
+
 export default ChatContainer;
