@@ -1,15 +1,12 @@
-
 import React from 'react';
 import ActionLog from './ActionLog';
 import FormattedContent from './FormattedContent';
 import MessageActions from './MessageActions';
-
 interface ActionLogStep {
   text: string;
   source?: string;
   document?: string;
 }
-
 interface AIMessageProps {
   content: string;
   actionLogSteps: ActionLogStep[];
@@ -18,7 +15,6 @@ interface AIMessageProps {
   onRegenerateResponse?: () => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
 }
-
 const AIMessage: React.FC<AIMessageProps> = ({
   content,
   actionLogSteps,
@@ -27,33 +23,22 @@ const AIMessage: React.FC<AIMessageProps> = ({
   onRegenerateResponse,
   onFeedback
 }) => {
-  return (
-    <div className="py-6 bg-muted dark:bg-accent">
+  return <div className="py-6 bg-transparent">
       <div className="max-w-4xl mx-auto px-4">
         <div className="flex flex-col w-full">
           {/* Action Log component - keep at the top */}
-          {actionLogSteps.length > 0 && (
-            <div className="mb-4 w-full">
+          {actionLogSteps.length > 0 && <div className="mb-4 w-full">
               <ActionLog steps={actionLogSteps} />
-            </div>
-          )}
+            </div>}
           
           {/* Content now aligned to the left with explicit text coloring */}
           <div className="w-full text-foreground dark:text-foreground">
             <FormattedContent content={content} />
             
-            <MessageActions 
-              content={content}
-              onBookmark={onBookmark}
-              onCopy={onCopy}
-              onRegenerateResponse={onRegenerateResponse}
-              onFeedback={onFeedback}
-            />
+            <MessageActions content={content} onBookmark={onBookmark} onCopy={onCopy} onRegenerateResponse={onRegenerateResponse} onFeedback={onFeedback} />
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AIMessage;
