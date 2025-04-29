@@ -1,34 +1,11 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-interface Bookmark {
-  id: string;
-  title: string;
-  date: string;
-  content: string;
-  documentPath?: string;
-  documentName?: string;
-}
+import { useBookmarkStore } from '../services/bookmarkService';
+import { BookmarkCheck } from 'lucide-react';
 
 const BookmarksPage: React.FC = () => {
-  const [bookmarks, setBookmarks] = useState<Bookmark[]>([
-    {
-      id: '1',
-      title: 'NDA that fits Dubai\'s law',
-      date: '4/23/25 19:20',
-      content: 'Your custom DIFC-compliant NDA is ready.\n\nPlease note\nWhile this NDA can serve as a legally sound draft, I always recommend that you have a licensed legal professional in the UAE review it before execution, especially for high-stakes or international deals.',
-      documentPath: '/path/to/document.pdf',
-      documentName: 'Nakhla\'s_DIFC-compliant NDA.pdf'
-    },
-    {
-      id: '2',
-      title: 'Eligibility check for DIFC\'s government grants',
-      date: '4/23/25 19:20',
-      content: 'Thank you for providing the necessary information.\nAfter reviewing your company\'s profile, I am pleased to confirm that your startup appears to meet the general eligibility criteria for DIFC government grants and innovation support programs.\n\nSpecifically:\n• Industry Alignment: Your company operates within a priority sector recognized by DIFC (e.g., FinTech, LegalTech, HealthTech, etc.).\n• Business Stage: Your company\'s growth stage and innovation profile align well with DIFC\'s target demographic for grants and startup support.\n• Registration Status: You either maintain an existing presence within the DIFC or are in the process of formal registration, fulfilling a key prerequisite for grant consideration.\n• Compliance Readiness: Based on the information provided, your company is positioned to meet DIFC\'s regulatory compliance requirements, including data protection, governance standards, and beneficial ownership disclosure.',
-    }
-  ]);
-
+  const { bookmarks, removeBookmark } = useBookmarkStore();
   const [expandedBookmarkId, setExpandedBookmarkId] = useState<string | null>('2');
 
   const toggleExpand = (id: string) => {
@@ -37,10 +14,6 @@ const BookmarksPage: React.FC = () => {
     } else {
       setExpandedBookmarkId(id);
     }
-  };
-
-  const removeBookmark = (id: string) => {
-    setBookmarks(bookmarks.filter(bookmark => bookmark.id !== id));
   };
 
   return (
@@ -68,9 +41,7 @@ const BookmarksPage: React.FC = () => {
                       onClick={() => removeBookmark(bookmark.id)}
                       className="p-1 text-gray-400 hover:text-muwakkil-purple"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                      </svg>
+                      <BookmarkCheck size={20} />
                     </button>
                   </div>
 

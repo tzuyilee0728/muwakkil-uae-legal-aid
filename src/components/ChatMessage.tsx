@@ -15,7 +15,7 @@ interface ChatMessageProps {
     source?: string;
     document?: string;
   }>;
-  onBookmark?: () => void;
+  onBookmark?: (messageId: string) => void;
   onCopy?: () => void;
   onRegenerateResponse?: () => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
@@ -37,7 +37,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
     <AIMessage
       content={message.content}
       actionLogSteps={actionLogSteps}
-      onBookmark={onBookmark}
+      onBookmark={() => onBookmark && onBookmark(message.id)}
       onCopy={onCopy}
       onRegenerateResponse={onRegenerateResponse}
       onFeedback={onFeedback}

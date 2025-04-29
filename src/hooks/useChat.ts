@@ -1,5 +1,7 @@
 
 import { useState, useEffect } from 'react';
+import { format } from 'date-fns';
+import { useBookmarkStore } from '../services/bookmarkService';
 
 export interface Message {
   id: string;
@@ -16,6 +18,10 @@ export interface ActionLogStep {
 export const useChat = (chatId?: string) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const { addBookmark } = useBookmarkStore();
+  
+  // Chat title based on the current conversation
+  const [chatTitle, setChatTitle] = useState<string>("");
   
   // Mock action log steps
   const actionLogSteps: ActionLogStep[] = [
@@ -40,6 +46,7 @@ export const useChat = (chatId?: string) => {
       
       // Simulate fetching existing chat history
       setTimeout(() => {
+        setChatTitle("Eligibility check for DIFC's government grants");
         setMessages([
           { id: '1', content: 'Is my company eligible for DIFC\'s government grants?', sender: 'user' as const },
           { 
@@ -56,6 +63,14 @@ export const useChat = (chatId?: string) => {
   const handleSendMessage = (message: string) => {
     const newMessages = [...messages, { id: Date.now().toString(), content: message, sender: 'user' as const }];
     setMessages(newMessages);
+    
+    // Auto-generate title from first user message if it's a new chat
+    if (messages.length === 0 && (!chatId || chatId === 'new')) {
+      const shortTitle = message.length > 30 
+        ? message.substring(0, 27) + '...' 
+        : message;
+      setChatTitle(shortTitle);
+    }
     
     // Simulate AI response
     setLoading(true);
@@ -90,13 +105,30 @@ export const useChat = (chatId?: string) => {
     }, 3000);
   };
 
+  const handleBookmark = (messageId: string) => {
+    const messageToBookmark = messages.find(msg => msg.id === messageId);
+    
+    if (messageToBookmark && messageToBookmark.sender === 'ai') {
+      const currentDate = format(new Date(), 'M/dd/yy HH:mm');
+      
+      addBookmark({
+        id: messageId,
+        title: chatTitle || "Untitled Chat",
+        date: currentDate,
+        content: messageToBookmark.content
+      });
+    }
+  };
+
   return {
     messages,
     loading,
     handleSendMessage,
     handleFileUpload,
+    handleBookmark,
     actionLogSteps,
     isNewChat: !chatId || chatId === 'new',
+    chatTitle,
   };
 };
 

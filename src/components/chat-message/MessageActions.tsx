@@ -1,8 +1,9 @@
 
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check, BookmarkCheck } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { HoverButton } from "@/components/ui/hover-button";
+import { useToast } from "@/hooks/use-toast";
 import {
   Tooltip,
   TooltipContent,
@@ -16,6 +17,7 @@ interface MessageActionsProps {
   onRegenerateResponse?: () => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
   content: string;
+  isBookmarked?: boolean;
 }
 
 const MessageActions: React.FC<MessageActionsProps> = ({
@@ -23,15 +25,28 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   onCopy,
   onRegenerateResponse,
   onFeedback,
-  content
+  content,
+  isBookmarked = false
 }) => {
   const [isCopied, setIsCopied] = useState(false);
+  const [bookmarked, setBookmarked] = useState(isBookmarked);
+  const { toast } = useToast();
 
   const handleCopy = () => {
     navigator.clipboard.writeText(content);
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
     if (onCopy) onCopy();
+  };
+
+  const handleBookmark = () => {
+    setBookmarked(true);
+    if (onBookmark) onBookmark();
+    
+    toast({
+      title: "Bookmarked",
+      description: "This message has been saved to your bookmarks.",
+    });
   };
 
   return (
@@ -124,13 +139,20 @@ const MessageActions: React.FC<MessageActionsProps> = ({
               variant="outline"
               size="icon"
               className="border-0"
-              onClick={() => onBookmark && onBookmark()}
+              onClick={handleBookmark}
               aria-label="Bookmark"
+              disabled={bookmarked}
             >
-              <Bookmark size={16} strokeWidth={1.5} />
+              {bookmarked ? (
+                <BookmarkCheck size={16} strokeWidth={1.5} className="text-muwakkil-purple" />
+              ) : (
+                <Bookmark size={16} strokeWidth={1.5} />
+              )}
             </HoverButton>
           </TooltipTrigger>
-          <TooltipContent className="px-2 py-1 text-xs">Bookmark this response</TooltipContent>
+          <TooltipContent className="px-2 py-1 text-xs">
+            {bookmarked ? "Bookmarked" : "Bookmark this response"}
+          </TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </div>

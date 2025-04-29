@@ -14,7 +14,9 @@ const ChatPage: React.FC = () => {
     loading, 
     handleSendMessage, 
     handleFileUpload, 
+    handleBookmark,
     actionLogSteps,
+    chatTitle
   } = useChat(id);
 
   // Always show prompt suggestions if we have no messages
@@ -31,7 +33,7 @@ const ChatPage: React.FC = () => {
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Chat title */}
       <ChatHeader 
-        title={id && id !== 'new' ? "Eligibility check for DIFC's government grants" : ""}
+        title={chatTitle || (id && id !== 'new' ? "Eligibility check for DIFC's government grants" : "")}
         timestamp={id && id !== 'new' ? "4/23/25 19:20" : ""}
       />
       
@@ -40,6 +42,7 @@ const ChatPage: React.FC = () => {
         messages={messages} 
         loading={loading} 
         actionLogSteps={actionLogSteps}
+        onBookmark={handleBookmark}
       />
       
       {/* Input area */}
