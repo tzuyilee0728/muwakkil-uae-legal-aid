@@ -12,6 +12,7 @@ import AccountPage from "./pages/AccountPage";
 import FindLawyerPage from "./pages/FindLawyerPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import DisclaimerPage from "./pages/DisclaimerPage";
 import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import NotFound from "./pages/NotFound";
@@ -32,6 +33,9 @@ const App = () => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Route>
+          
+          {/* Disclaimer page after login */}
+          <Route path="/disclaimer" element={<DisclaimerPage />} />
           
           {/* App routes - protected in a real app */}
           <Route path="/app" element={<AppLayout />}>

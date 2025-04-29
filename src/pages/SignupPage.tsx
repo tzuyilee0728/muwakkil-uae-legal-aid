@@ -1,8 +1,17 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignupPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // In a real app, you would create the user account here
+    // For now, just redirect to the disclaimer page
+    navigate('/disclaimer');
+  };
+
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
       <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -11,7 +20,7 @@ const SignupPage: React.FC = () => {
           <p className="text-gray-600 mt-2">Start your legal journey with Muwakkil</p>
         </div>
         
-        <form className="space-y-6" action="/app">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
