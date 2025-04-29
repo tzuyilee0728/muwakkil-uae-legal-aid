@@ -1,6 +1,6 @@
 
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import ChatInput from '../components/ChatInput';
 import ChatContainer from '../components/chat/ChatContainer';
 import ChatHeader from '../components/chat/ChatHeader';
@@ -8,7 +8,11 @@ import ChatPromptSuggestions from '../components/chat/ChatPromptSuggestions';
 import { useChat } from '../hooks/useChat';
 
 const ChatPage: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
+  // Use search parameters instead of path parameters
+  const [searchParams] = useSearchParams();
+  const chatId = searchParams.get('id');
+  const location = useLocation();
+  
   const { 
     messages, 
     loading, 
@@ -16,8 +20,14 @@ const ChatPage: React.FC = () => {
     handleFileUpload, 
     handleBookmark,
     actionLogSteps,
-    chatTitle
-  } = useChat(id);
+    chatTitle,
+    handleFeedback
+  } = useChat(chatId);
+
+  // Update the document title when the chat title changes
+  useEffect(() => {
+    document.title = chatTitle ? `${chatTitle} | Muwakkil` : 'Chat | Muwakkil';
+  }, [chatTitle]);
 
   // Always show prompt suggestions if we have no messages
   if (messages.length === 0) {
@@ -33,8 +43,8 @@ const ChatPage: React.FC = () => {
     <div className="flex-1 flex flex-col overflow-hidden">
       {/* Chat title */}
       <ChatHeader 
-        title={chatTitle || (id && id !== 'new' ? "Eligibility check for DIFC's government grants" : "")}
-        timestamp={id && id !== 'new' ? "4/23/25 19:20" : ""}
+        title={chatTitle || "New Chat"}
+        timestamp={chatId ? "4/23/25 19:20" : ""}
       />
       
       {/* Messages list */}
@@ -43,6 +53,7 @@ const ChatPage: React.FC = () => {
         loading={loading} 
         actionLogSteps={actionLogSteps}
         onBookmark={handleBookmark}
+        onFeedback={handleFeedback}
       />
       
       {/* Input area */}

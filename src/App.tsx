@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import ChatPage from "./pages/ChatPage";
 import KnowledgePage from "./pages/KnowledgePage";
@@ -39,9 +39,13 @@ const App = () => (
           
           {/* App routes - protected in a real app */}
           <Route path="/app" element={<AppLayout />}>
-            <Route index element={<ChatPage />} />
+            {/* Redirect /app to /app/chat */}
+            <Route index element={<Navigate to="/app/chat" replace />} />
+            
+            {/* Consolidated chat route that handles all chat scenarios */}
             <Route path="chat" element={<ChatPage />} />
-            <Route path="chat/:id" element={<ChatPage />} />
+            
+            {/* Remove the individual chat/:id route and handle it within ChatPage */}
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="bookmarks" element={<BookmarksPage />} />
             <Route path="account" element={<AccountPage />} />
