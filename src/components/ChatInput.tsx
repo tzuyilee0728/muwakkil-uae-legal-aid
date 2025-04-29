@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Upload, Mic } from 'lucide-react';
+import { Upload, Mic, Send } from 'lucide-react';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -25,8 +25,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background">
-      <div className="flex items-center bg-muted dark:bg-accent rounded-md border border-gray-200 dark:border-gray-700">
+    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background fixed bottom-0 left-0 right-0 z-10">
+      <div className="flex items-center bg-muted dark:bg-accent rounded-md border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto">
         <label htmlFor="file-upload" className="p-3 hover:bg-gray-100 dark:hover:bg-muted rounded-l-md cursor-pointer">
           <Upload size={20} className="text-gray-500 dark:text-gray-400" />
           <input
@@ -51,14 +51,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
         </button>
         <button 
           type="submit"
-          className="p-3 ml-1 text-purple-600 dark:text-primary hover:bg-gray-100 dark:hover:bg-muted"
+          className="p-3 ml-1 text-purple-600 dark:text-primary hover:bg-gray-100 dark:hover:bg-muted rounded-r-md"
         >
-          {message.trim() ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 2L11 13"></path>
-              <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
-            </svg>
-          ) : null}
+          {message.trim() ? <Send size={20} /> : null}
         </button>
       </div>
     </form>

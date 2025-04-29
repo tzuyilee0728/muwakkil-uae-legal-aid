@@ -32,7 +32,7 @@ const ChatPage: React.FC = () => {
   // Always show prompt suggestions if we have no messages
   if (messages.length === 0) {
     return (
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col relative h-full">
         <ChatPromptSuggestions onSelectPrompt={handleSendMessage} />
         <ChatInput onSendMessage={handleSendMessage} onFileUpload={handleFileUpload} />
       </div>
@@ -40,7 +40,7 @@ const ChatPage: React.FC = () => {
   }
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden">
+    <div className="flex-1 flex flex-col relative h-full">
       {/* Chat title */}
       <ChatHeader 
         title={chatTitle || "New Chat"}
