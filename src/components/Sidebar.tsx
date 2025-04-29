@@ -24,6 +24,7 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const currentChatId = searchParams.get('id');
+  const isOnChatPage = location.pathname === '/app/chat';
 
   // Main navigation items
   const navItems: NavItem[] = [{
@@ -140,13 +141,15 @@ const Sidebar: React.FC = () => {
           New chat
         </button>
         
-        <button 
-          onClick={handleSignOut}
-          className="w-full flex items-center justify-center px-4 text-red-600 hover:bg-red-50 rounded-md transition-colors py-[8px] border border-red-200 dark:hover:bg-red-900/20 dark:border-red-800"
-        >
-          <LogOut size={18} className="mr-2" />
-          Sign Out
-        </button>
+        {!isOnChatPage && (
+          <button 
+            onClick={handleSignOut}
+            className="w-full flex items-center justify-center px-4 text-red-600 hover:bg-red-50 rounded-md transition-colors py-[8px] border border-red-200 dark:hover:bg-red-900/20 dark:border-red-800"
+          >
+            <LogOut size={18} className="mr-2" />
+            Sign Out
+          </button>
+        )}
       </div>
     </div>
   );
