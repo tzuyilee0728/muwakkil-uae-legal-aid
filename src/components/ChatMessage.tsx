@@ -1,6 +1,14 @@
 
 import React, { useState } from 'react';
-import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, RefreshCcw, Copy, Bookmark, Check } from 'lucide-react';
+import { cn } from "@/lib/utils";
+import { HoverButton } from "@/components/ui/hover-button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 interface ChatMessageProps {
   message: {
@@ -65,46 +73,99 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
               </div>
               
               <div className="mt-4 flex items-center space-x-4 text-gray-500">
-                <button 
-                  onClick={handleCopy} 
-                  className="p-2 hover:bg-gray-200 rounded-md"
-                  aria-label="Copy"
-                  title="Copy"
-                >
-                  <Copy size={18} strokeWidth={1.5} />
-                </button>
-                <button 
-                  onClick={() => onFeedback && onFeedback('positive')} 
-                  className="p-2 hover:bg-gray-200 rounded-md"
-                  aria-label="Like"
-                  title="Like"
-                >
-                  <ThumbsUp size={18} strokeWidth={1.5} />
-                </button>
-                <button 
-                  onClick={() => onFeedback && onFeedback('negative')} 
-                  className="p-2 hover:bg-gray-200 rounded-md"
-                  aria-label="Dislike"
-                  title="Dislike"
-                >
-                  <ThumbsDown size={18} strokeWidth={1.5} />
-                </button>
-                <button 
-                  onClick={() => onRegenerateResponse && onRegenerateResponse()} 
-                  className="p-2 hover:bg-gray-200 rounded-md"
-                  aria-label="Regenerate"
-                  title="Regenerate"
-                >
-                  <RefreshCcw size={18} strokeWidth={1.5} />
-                </button>
-                <button 
-                  onClick={() => onBookmark && onBookmark()} 
-                  className="p-2 hover:bg-gray-200 rounded-md"
-                  aria-label="Bookmark"
-                  title="Bookmark"
-                >
-                  <Bookmark size={18} strokeWidth={1.5} />
-                </button>
+                <TooltipProvider delayDuration={0}>
+                  {/* Copy button */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HoverButton
+                        variant="outline"
+                        size="icon"
+                        className="disabled:opacity-100"
+                        onClick={handleCopy}
+                        aria-label={isCopied ? "Copied" : "Copy to clipboard"}
+                        disabled={isCopied}
+                      >
+                        <div
+                          className={cn(
+                            "transition-all",
+                            isCopied ? "scale-100 opacity-100" : "scale-0 opacity-0",
+                          )}
+                        >
+                          <Check className="stroke-emerald-500" size={16} strokeWidth={1.5} aria-hidden="true" />
+                        </div>
+                        <div
+                          className={cn(
+                            "absolute transition-all",
+                            isCopied ? "scale-0 opacity-0" : "scale-100 opacity-100",
+                          )}
+                        >
+                          <Copy size={16} strokeWidth={1.5} aria-hidden="true" />
+                        </div>
+                      </HoverButton>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">Copy message</TooltipContent>
+                  </Tooltip>
+
+                  {/* Like button */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HoverButton
+                        variant="outline"
+                        size="icon"
+                        onClick={() => onFeedback && onFeedback('positive')}
+                        aria-label="Like"
+                      >
+                        <ThumbsUp size={16} strokeWidth={1.5} />
+                      </HoverButton>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">Like response</TooltipContent>
+                  </Tooltip>
+
+                  {/* Dislike button */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HoverButton
+                        variant="outline"
+                        size="icon"
+                        onClick={() => onFeedback && onFeedback('negative')}
+                        aria-label="Dislike"
+                      >
+                        <ThumbsDown size={16} strokeWidth={1.5} />
+                      </HoverButton>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">Dislike response</TooltipContent>
+                  </Tooltip>
+
+                  {/* Regenerate button */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HoverButton
+                        variant="outline"
+                        size="icon"
+                        onClick={() => onRegenerateResponse && onRegenerateResponse()}
+                        aria-label="Regenerate"
+                      >
+                        <RefreshCcw size={16} strokeWidth={1.5} />
+                      </HoverButton>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">Regenerate response</TooltipContent>
+                  </Tooltip>
+
+                  {/* Bookmark button */}
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <HoverButton
+                        variant="outline"
+                        size="icon"
+                        onClick={() => onBookmark && onBookmark()}
+                        aria-label="Bookmark"
+                      >
+                        <Bookmark size={16} strokeWidth={1.5} />
+                      </HoverButton>
+                    </TooltipTrigger>
+                    <TooltipContent className="px-2 py-1 text-xs">Bookmark this response</TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </div>
