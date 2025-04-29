@@ -43,7 +43,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
             <HoverButton
               variant="outline"
               size="icon"
-              className="disabled:opacity-100"
+              className="disabled:opacity-100 border-0"
               onClick={handleCopy}
               aria-label={isCopied ? "Copied" : "Copy to clipboard"}
               disabled={isCopied}
@@ -75,6 +75,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
             <HoverButton
               variant="outline"
               size="icon"
+              className="border-0"
               onClick={() => onFeedback && onFeedback('positive')}
               aria-label="Like"
             >
@@ -90,6 +91,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
             <HoverButton
               variant="outline"
               size="icon"
+              className="border-0"
               onClick={() => onFeedback && onFeedback('negative')}
               aria-label="Dislike"
             >
@@ -105,6 +107,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
             <HoverButton
               variant="outline"
               size="icon"
+              className="border-0"
               onClick={() => onRegenerateResponse && onRegenerateResponse()}
               aria-label="Regenerate"
             >
@@ -120,6 +123,7 @@ const MessageActions: React.FC<MessageActionsProps> = ({
             <HoverButton
               variant="outline"
               size="icon"
+              className="border-0"
               onClick={() => onBookmark && onBookmark()}
               aria-label="Bookmark"
             >
