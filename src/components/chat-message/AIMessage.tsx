@@ -31,21 +31,25 @@ const AIMessage: React.FC<AIMessageProps> = ({
   return (
     <div className="py-6 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex space-x-3">
-          <div className="flex-shrink-0 mt-1">
-            <Avatar className="h-8 w-8 bg-muwakkil-purple">
-              <AvatarImage
-                src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
-                alt="Muwakkil Logo"
-                className="h-full w-full p-1.5"
-              />
-            </Avatar>
+        <div className="flex flex-col">
+          <div className="flex mb-4">
+            {/* Avatar */}
+            <div className="flex-shrink-0 mr-3">
+              <Avatar className="h-8 w-8 bg-muwakkil-purple">
+                <AvatarImage
+                  src="/lovable-uploads/8d2bf5c3-e087-4c59-92c2-869320739b49.png"
+                  alt="Muwakkil Logo"
+                  className="h-full w-full p-1.5"
+                />
+              </Avatar>
+            </div>
+            
+            {/* Action Log component */}
+            {actionLogSteps.length > 0 && <ActionLog steps={actionLogSteps} />}
           </div>
           
-          {/* Action Log component */}
-          {actionLogSteps.length > 0 && <ActionLog steps={actionLogSteps} />}
-          
-          <div className="flex-grow">
+          {/* Content moved below avatar and action log */}
+          <div className="ml-11">
             <FormattedContent content={content} />
             
             <MessageActions 
