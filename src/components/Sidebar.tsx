@@ -24,17 +24,17 @@ const Sidebar: React.FC = () => {
   
   // Main navigation items
   const navItems: NavItem[] = [
-    { name: 'Knowledge', icon: <BookOpen size={20} />, path: '/knowledge' },
-    { name: 'Bookmarks', icon: <Bookmark size={20} />, path: '/bookmarks' },
-    { name: 'Account', icon: <User size={20} />, path: '/account' },
-    { name: 'Find a lawyer', icon: <Scale size={20} />, path: '/find-lawyer', badge: 'Pro' },
+    { name: 'Knowledge', icon: <BookOpen size={20} />, path: '/app/knowledge' },
+    { name: 'Bookmarks', icon: <Bookmark size={20} />, path: '/app/bookmarks' },
+    { name: 'Account', icon: <User size={20} />, path: '/app/account' },
+    { name: 'Find a lawyer', icon: <Scale size={20} />, path: '/app/find-lawyer', badge: 'Pro' },
   ];
 
   // Sample previous chat items
   const recentChats: ChatItem[] = [
-    { id: '1', title: 'File a NDA for all free zon...', path: '/chat/1' },
-    { id: '2', title: 'Filing tax in UAE', path: '/chat/2' },
-    { id: '3', title: 'Generate TODO list for st...', path: '/chat/3' },
+    { id: '1', title: 'File a NDA for all free zon...', path: '/app/chat/1' },
+    { id: '2', title: 'Filing tax in UAE', path: '/app/chat/2' },
+    { id: '3', title: 'Generate TODO list for st...', path: '/app/chat/3' },
   ];
 
   return (
@@ -87,7 +87,7 @@ const Sidebar: React.FC = () => {
       
       <div className="p-4">
         <Link
-          to="/chat/new"
+          to="/app/chat/new"
           className="w-full flex items-center justify-center px-4 py-3 bg-muwakkil-purple hover:bg-purple-600 text-white rounded-md transition-colors"
         >
           <span className="mr-2">+</span>
