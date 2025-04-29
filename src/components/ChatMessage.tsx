@@ -64,37 +64,46 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
                 {formattedContent}
               </div>
               
-              <div className="mt-4 flex items-center space-x-2 text-gray-500">
+              <div className="mt-4 flex items-center space-x-4 text-gray-500">
                 <button 
                   onClick={handleCopy} 
-                  className="p-1 hover:bg-gray-200 rounded-md flex items-center text-xs"
+                  className="p-2 hover:bg-gray-200 rounded-md"
+                  aria-label="Copy"
+                  title="Copy"
                 >
-                  <Copy size={16} className="mr-1" />
-                  <span>{isCopied ? 'Copied!' : 'Copy'}</span>
+                  <Copy size={18} strokeWidth={1.5} />
                 </button>
                 <button 
                   onClick={() => onFeedback && onFeedback('positive')} 
-                  className="p-1 hover:bg-gray-200 rounded-md"
+                  className="p-2 hover:bg-gray-200 rounded-md"
+                  aria-label="Like"
+                  title="Like"
                 >
-                  <ThumbsUp size={16} />
+                  <ThumbsUp size={18} strokeWidth={1.5} />
                 </button>
                 <button 
                   onClick={() => onFeedback && onFeedback('negative')} 
-                  className="p-1 hover:bg-gray-200 rounded-md"
+                  className="p-2 hover:bg-gray-200 rounded-md"
+                  aria-label="Dislike"
+                  title="Dislike"
                 >
-                  <ThumbsDown size={16} />
+                  <ThumbsDown size={18} strokeWidth={1.5} />
                 </button>
                 <button 
                   onClick={() => onRegenerateResponse && onRegenerateResponse()} 
-                  className="p-1 hover:bg-gray-200 rounded-md"
+                  className="p-2 hover:bg-gray-200 rounded-md"
+                  aria-label="Regenerate"
+                  title="Regenerate"
                 >
-                  <RefreshCcw size={16} />
+                  <RefreshCcw size={18} strokeWidth={1.5} />
                 </button>
                 <button 
                   onClick={() => onBookmark && onBookmark()} 
-                  className="p-1 hover:bg-gray-200 rounded-md"
+                  className="p-2 hover:bg-gray-200 rounded-md"
+                  aria-label="Bookmark"
+                  title="Bookmark"
                 >
-                  <Bookmark size={16} />
+                  <Bookmark size={18} strokeWidth={1.5} />
                 </button>
               </div>
             </div>
