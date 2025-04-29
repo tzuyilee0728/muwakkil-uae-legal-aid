@@ -43,12 +43,14 @@ const App = () => (
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           
           {/* App routes - protected in a real app */}
-          <Route path="/" element={<AppLayout />}>
-            {/* Redirect / to /chat */}
-            <Route path="" element={<Navigate to="/chat" replace />} />
+          <Route path="/app" element={<AppLayout />}>
+            {/* Redirect /app to /app/chat */}
+            <Route index element={<Navigate to="/app/chat" replace />} />
             
-            {/* Main app routes */}
+            {/* Consolidated chat route that handles all chat scenarios */}
             <Route path="chat" element={<ChatPage />} />
+            
+            {/* Remove the individual chat/:id route and handle it within ChatPage */}
             <Route path="knowledge" element={<KnowledgePage />} />
             <Route path="bookmarks" element={<BookmarksPage />} />
             <Route path="account" element={<AccountPage />} />

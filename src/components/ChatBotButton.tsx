@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { MessageCircle } from 'lucide-react';
+import { MessageCircle, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
@@ -10,12 +10,13 @@ interface ChatBotButtonProps {
 }
 
 const ChatBotButton: React.FC<ChatBotButtonProps> = ({ isAuthenticated = false }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleChatClick = () => {
     if (isAuthenticated) {
-      navigate('/chat');
+      navigate('/app/chat');
     } else {
       toast({
         title: "Authentication Required",
