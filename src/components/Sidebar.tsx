@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
@@ -82,7 +83,7 @@ const Sidebar: React.FC = () => {
     navigate('/');
   };
   return <div className="w-64 h-screen border-r border-gray-200 bg-white flex flex-col dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200">
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4">
         <Logo />
       </div>
       
