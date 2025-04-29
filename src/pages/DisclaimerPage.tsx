@@ -75,7 +75,7 @@ const DisclaimerPage: React.FC = () => {
                 <li>ADGM Data Protection Regulations 2021 (for Abu Dhabi Global Market users)</li>
               </ul>
               <p className="text-gray-700 mt-2">
-                User consent is required for document analysis, and all files <span className="text-purple-500 font-medium">are deleted within 7 days</span> per UAE data residency
+                User consent is required for document analysis, and all files <span className="text-[#855ECB] font-medium">are deleted within 7 days</span> per UAE data residency
                 requirements.
               </p>
             </section>
@@ -141,7 +141,7 @@ const DisclaimerPage: React.FC = () => {
             </Button>
             <Button 
               onClick={handleAgree} 
-              className={`flex-1 ${agreed ? 'bg-purple-600 hover:bg-purple-700' : 'bg-gray-400 hover:bg-gray-500'}`}
+              className={`flex-1 ${agreed ? 'bg-[#855ECB] hover:bg-[#7346b5]' : 'bg-gray-400 hover:bg-gray-500'}`}
               disabled={!agreed}
             >
               I Agree

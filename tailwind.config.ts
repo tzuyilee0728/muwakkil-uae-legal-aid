@@ -64,7 +64,7 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				muwakkil: {
-					purple: '#9b87f5',
+					purple: '#855ECB',
 					light: '#F1F0FB',
 					gray: '#8E9196'
 				}
