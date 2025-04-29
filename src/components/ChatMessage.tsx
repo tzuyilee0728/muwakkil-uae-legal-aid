@@ -8,7 +8,7 @@ interface ChatMessageProps {
     id: string;
     content: string;
     sender: 'user' | 'ai';
-    timestamp?: string;
+    timestamp?: Date | string;
   };
   actionLogSteps?: Array<{
     text: string;
