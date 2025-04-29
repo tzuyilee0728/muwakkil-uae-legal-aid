@@ -38,21 +38,6 @@ const AccountPage: React.FC = () => {
                 Upgrade to Pro
               </button>
             </div>
-            
-            <div className="mt-4 grid grid-cols-3 gap-4">
-              <div className="p-3 border border-gray-200 rounded-md text-center">
-                <p className="text-2xl font-semibold">34</p>
-                <p className="text-sm text-gray-600">Chats Remaining</p>
-              </div>
-              <div className="p-3 border border-gray-200 rounded-md text-center">
-                <p className="text-2xl font-semibold">4</p>
-                <p className="text-sm text-gray-600">Document Uploads</p>
-              </div>
-              <div className="p-3 border border-gray-200 rounded-md text-center">
-                <p className="text-2xl font-semibold">0/1</p>
-                <p className="text-sm text-gray-600">Premium Support</p>
-              </div>
-            </div>
           </div>
           
           {/* Settings Links */}
