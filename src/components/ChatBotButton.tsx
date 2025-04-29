@@ -38,10 +38,10 @@ const ChatBotButton: React.FC<ChatBotButtonProps> = ({ isAuthenticated = false }
     <div className="fixed bottom-6 right-6 z-50">
       <Button
         onClick={handleChatClick}
-        className="rounded-full w-14 h-14 bg-muwakkil-purple hover:bg-muwakkil-purple/90 shadow-lg flex items-center justify-center p-0"
+        className="rounded-full w-14 h-14 bg-muwakkil-purple hover:bg-muwakkil-purple/90 shadow-lg flex items-center justify-center p-0 text-white"
         aria-label="Open chat"
       >
-        <MessageCircle className="h-6 w-6 text-white" />
+        <MessageCircle className="h-6 w-6" />
       </Button>
     </div>
   );

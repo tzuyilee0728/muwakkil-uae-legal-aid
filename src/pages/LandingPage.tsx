@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
@@ -12,12 +11,17 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
+import { MoonIcon, SunIcon } from 'lucide-react';
+import { useTheme } from '@/hooks/useTheme';
+import { Button } from '@/components/ui/button';
 
 const LandingPage: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+  
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 z-10">
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 fixed top-0 left-0 right-0 z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Logo />
@@ -25,48 +29,74 @@ const LandingPage: React.FC = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple">Solutions</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Solutions</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <div className="grid grid-cols-2 gap-3 p-4 w-[400px]">
-                        <div className="p-2 hover:bg-gray-50 rounded-md">
-                          <h5 className="font-medium text-gray-900">Document Review</h5>
-                          <p className="text-sm text-gray-500">Get your legal documents analyzed</p>
+                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
+                          <h5 className="font-medium text-gray-900 dark:text-white">Document Review</h5>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Get your legal documents analyzed</p>
                         </div>
-                        <div className="p-2 hover:bg-gray-50 rounded-md">
-                          <h5 className="font-medium text-gray-900">Legal Compliance</h5>
-                          <p className="text-sm text-gray-500">Stay compliant with UAE regulations</p>
+                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
+                          <h5 className="font-medium text-gray-900 dark:text-white">Legal Compliance</h5>
+                          <p className="text-sm text-gray-500 dark:text-gray-400">Stay compliant with UAE regulations</p>
                         </div>
                       </div>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple">Resources</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Resources</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <div className="grid grid-cols-1 gap-3 p-4 w-[200px]">
-                        <div className="p-2 hover:bg-gray-50 rounded-md">
-                          <h5 className="font-medium text-gray-900">Knowledge Base</h5>
+                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
+                          <h5 className="font-medium text-gray-900 dark:text-white">Knowledge Base</h5>
                         </div>
-                        <div className="p-2 hover:bg-gray-50 rounded-md">
-                          <h5 className="font-medium text-gray-900">Legal Templates</h5>
+                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
+                          <h5 className="font-medium text-gray-900 dark:text-white">Legal Templates</h5>
                         </div>
                       </div>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <Link to="#pricing" className="text-gray-700 hover:text-muwakkil-purple px-3 py-2">
+                    <Link to="#pricing" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple px-3 py-2">
                       Pricing
                     </Link>
                   </NavigationMenuItem>
                 </NavigationMenuList>
               </NavigationMenu>
-              <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple">Login</Link>
+              <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Login</Link>
               <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
                 Sign Up
               </Link>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleTheme} 
+                className="mr-2"
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? (
+                  <SunIcon className="h-5 w-5" />
+                ) : (
+                  <MoonIcon className="h-5 w-5" />
+                )}
+              </Button>
             </div>
             {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button className="text-gray-500 hover:text-gray-700">
+            <div className="md:hidden flex items-center">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleTheme} 
+                className="mr-2"
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? (
+                  <SunIcon className="h-5 w-5" />
+                ) : (
+                  <MoonIcon className="h-5 w-5" />
+                )}
+              </Button>
+              <button className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="3" y1="12" x2="21" y2="12"></line>
                   <line x1="3" y1="6" x2="21" y2="6"></line>

@@ -28,7 +28,9 @@ const AppLayout: React.FC = () => {
             )}
           </Button>
         </div>
-        <Outlet />
+        <main className="flex-1 overflow-auto bg-white dark:bg-gray-900">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
