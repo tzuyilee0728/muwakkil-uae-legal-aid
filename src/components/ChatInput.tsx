@@ -25,7 +25,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background fixed bottom-0 left-0 right-0 z-10">
+    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background fixed bottom-0 left-64 right-0 z-10">
       <div className="flex items-center bg-muted dark:bg-accent rounded-md border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto">
         <label htmlFor="file-upload" className="p-3 hover:bg-gray-100 dark:hover:bg-muted rounded-l-md cursor-pointer">
           <Upload size={20} className="text-gray-500 dark:text-gray-400" />
