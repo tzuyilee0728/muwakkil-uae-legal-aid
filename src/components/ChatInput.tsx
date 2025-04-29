@@ -26,8 +26,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
   };
 
   return (
-    <form onSubmit={handleSubmit} className="border-t border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background fixed bottom-0 left-64 right-0 z-10">
-      <div className="flex items-start bg-muted dark:bg-accent rounded-md border border-gray-200 dark:border-gray-700 max-w-4xl mx-auto">
+    <form onSubmit={handleSubmit} className="p-4 bg-background dark:bg-background fixed bottom-0 left-64 right-0 z-10">
+      <div className="flex items-start bg-muted dark:bg-accent rounded-md max-w-4xl mx-auto relative">
         <label htmlFor="file-upload" className="p-3 hover:bg-gray-100 dark:hover:bg-muted rounded-l-md cursor-pointer">
           <Upload size={20} className="text-gray-500 dark:text-gray-400" />
           <input
@@ -41,7 +41,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Ask anything..."
-          className="flex-1 py-3 px-4 bg-transparent border-0 resize-none focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[40px] max-h-[200px] overflow-y-auto"
+          className="flex-1 py-3 px-4 bg-transparent border-0 resize-none focus-visible:ring-0 focus-visible:ring-offset-0 min-h-[40px] overflow-y-auto"
+          style={{ maxHeight: '300px' }}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault();
@@ -49,7 +50,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
             }
           }}
         />
-        <div className="flex items-center">
+        <div className="flex items-center self-end">
           <button 
             type="button"
             className="p-3 hover:bg-gray-100 dark:hover:bg-muted text-gray-500 dark:text-gray-400"
