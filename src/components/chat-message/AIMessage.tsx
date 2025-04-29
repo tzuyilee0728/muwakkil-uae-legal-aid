@@ -29,16 +29,16 @@ const AIMessage: React.FC<AIMessageProps> = ({
   return (
     <div className="py-6 bg-gray-50">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
           {/* Action Log component - keep at the top */}
           {actionLogSteps.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 w-full">
               <ActionLog steps={actionLogSteps} />
             </div>
           )}
           
           {/* Content now aligned to the left */}
-          <div>
+          <div className="w-full">
             <FormattedContent content={content} />
             
             <MessageActions 
