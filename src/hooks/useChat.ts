@@ -41,11 +41,11 @@ export const useChat = (chatId?: string) => {
       // Simulate fetching existing chat history
       setTimeout(() => {
         setMessages([
-          { id: '1', content: 'Is my company eligible for DIFC\'s government grants?', sender: 'user' },
+          { id: '1', content: 'Is my company eligible for DIFC\'s government grants?', sender: 'user' as const },
           { 
             id: '2', 
             content: "Thank you for your inquiry. Before I can provide you with accurate information about your eligibility for DIFC's government grants, I'll need some specific details about your company. Could you please share the following information:\n\n1. Business Activity: What sector does your company operate in?\n2. Stage of Business: Is your company a startup, SME, or larger enterprise?\n3. Registration Status: Are you already registered within DIFC or planning to register?",
-            sender: 'ai' 
+            sender: 'ai' as const 
           }
         ]);
         setLoading(false);
@@ -54,7 +54,7 @@ export const useChat = (chatId?: string) => {
   }, [chatId]);
 
   const handleSendMessage = (message: string) => {
-    const newMessages = [...messages, { id: Date.now().toString(), content: message, sender: 'user' }];
+    const newMessages = [...messages, { id: Date.now().toString(), content: message, sender: 'user' as const }];
     setMessages(newMessages);
     
     // Simulate AI response
@@ -64,7 +64,7 @@ export const useChat = (chatId?: string) => {
       setMessages([...newMessages, { 
         id: (Date.now() + 1).toString(), 
         content: responseContent, 
-        sender: 'ai' 
+        sender: 'ai' as const 
       }]);
       setLoading(false);
     }, 2000);
@@ -75,7 +75,7 @@ export const useChat = (chatId?: string) => {
     const newMessages = [...messages, { 
       id: Date.now().toString(), 
       content: `I've uploaded ${file.name} for analysis.`, 
-      sender: 'user' 
+      sender: 'user' as const 
     }];
     setMessages(newMessages);
     
@@ -84,7 +84,7 @@ export const useChat = (chatId?: string) => {
       setMessages([...newMessages, { 
         id: (Date.now() + 1).toString(), 
         content: `I've analyzed ${file.name}. This document appears to be in compliance with UAE business regulations, but there are two sections that may need review:\n\n• Section 4.2: The non-compete clause duration exceeds the 2-year maximum limit allowed in Dubai.\n• Section 7.1: The governing law should explicitly specify UAE Federal Law rather than just mentioning "applicable laws".\n\nWould you like me to suggest specific revisions for these sections?`, 
-        sender: 'ai' 
+        sender: 'ai' as const 
       }]);
       setLoading(false);
     }, 3000);
