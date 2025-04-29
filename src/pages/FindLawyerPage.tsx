@@ -7,7 +7,7 @@ const FindLawyerPage: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="mb-6 flex justify-between items-center">
           <h1 className="text-2xl font-semibold">Find a Lawyer</h1>
-          <span className="px-3 py-1 bg-muwakkil-purple text-white text-sm rounded-md">Pro</span>
+          <span className="px-3 py-1 text-[#855ECB] border border-[#855ECB] rounded-md text-sm">Pro</span>
         </div>
         
         <div className="bg-white rounded-lg border border-gray-200 p-10 text-center">
@@ -25,7 +25,7 @@ const FindLawyerPage: React.FC = () => {
             This feature is available exclusively for Pro users. Upgrade to access our network of vetted legal professionals in UAE.
           </p>
           
-          <button className="px-6 py-3 bg-muwakkil-purple text-white rounded-md hover:bg-purple-600">
+          <button className="px-6 py-3 bg-[#855ECB] text-white rounded-md hover:bg-purple-600">
             Upgrade to Pro
           </button>
           

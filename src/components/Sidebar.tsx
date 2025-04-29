@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
               <Link to={item.path} className={`flex items-center px-2 py-2 rounded-md text-sm ${location.pathname === item.path ? 'text-[#855ECB] bg-muwakkil-light font-medium' : 'text-gray-700 hover:bg-gray-100'}`}>
                 <span className="mr-3">{item.icon}</span>
                 <span>{item.name}</span>
-                {item.badge && <span className="ml-auto px-2 py-0.5 text-xs bg-[#855ECB] text-white rounded border border-[#855ECB]">
+                {item.badge && <span className="ml-auto px-2 py-0.5 text-xs text-[#855ECB] rounded border border-[#855ECB]">
                     {item.badge}
                   </span>}
               </Link>
