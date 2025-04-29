@@ -1,12 +1,15 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
+import { AuroraBackground } from '@/components/ui/aurora-background';
+import { motion } from 'framer-motion';
 
 const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-transparent border-b border-gray-200 absolute top-0 left-0 right-0 z-10">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <Logo />
@@ -20,13 +23,22 @@ const LandingPage: React.FC = () => {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+      {/* Hero Section with Aurora Background */}
+      <AuroraBackground className="min-h-screen">
+        <motion.div
+          initial={{ opacity: 0.0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="max-w-5xl mx-auto text-center px-4 z-10"
+        >
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
             The UAE Legal Assistant <span className="text-muwakkil-purple">Startups Trust</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
             Muwakkil makes UAE mainland legal compliance simple with AI-powered document review, 
             generation, and expert legal advice.
           </p>
@@ -34,35 +46,35 @@ const LandingPage: React.FC = () => {
             <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-8 py-4 rounded-md text-lg font-medium">
               Start for Free
             </Link>
-            <a href="#features" className="border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 px-8 py-4 rounded-md text-lg font-medium">
+            <a href="#features" className="border border-gray-300 bg-white dark:bg-transparent dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 px-8 py-4 rounded-md text-lg font-medium">
               Learn More
             </a>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </AuroraBackground>
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section id="features" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-16">How Muwakkil Helps Your Business</h2>
+          <h2 className="text-3xl font-bold text-center mb-16 dark:text-white">How Muwakkil Helps Your Business</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {/* Feature 1 */}
-            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="w-12 h-12 bg-muwakkil-light rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Conversational Legal Help</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4 dark:text-white">Conversational Legal Help</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Ask any legal question about UAE business law and get instant, accurate responses 
                 backed by Federal Law No. 32/2021 and DED regulations.
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="w-12 h-12 bg-muwakkil-light rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -72,23 +84,23 @@ const LandingPage: React.FC = () => {
                   <polyline points="10 9 9 9 8 9"></polyline>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Smart Document Review</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4 dark:text-white">Smart Document Review</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Upload contracts and legal documents to automatically flag non-compliant clauses 
                 and receive guidance on how to fix them.
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100">
+            <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
               <div className="w-12 h-12 bg-muwakkil-light rounded-lg flex items-center justify-center mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="9 11 12 14 22 4"></polyline>
                   <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-4">Jurisdiction-Specific Templates</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-bold mb-4 dark:text-white">Jurisdiction-Specific Templates</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Generate legally compliant documents tailored to your specific business needs 
                 in Dubai Mainland, DIFC, or UAE Free Zones.
               </p>
