@@ -38,7 +38,7 @@ const AIMessage: React.FC<AIMessageProps> = ({
             </div>
           )}
           
-          {/* Content now aligned to the left */}
+          {/* Content now aligned to the left with explicit text coloring */}
           <div className="w-full text-foreground dark:text-foreground">
             <FormattedContent content={content} />
             
