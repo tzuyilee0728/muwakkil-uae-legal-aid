@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 type PricingPlanProps = {
   name: string;
@@ -14,6 +15,24 @@ type PricingPlanProps = {
   ctaVariant?: 'primary' | 'secondary';
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+};
+
+const listItemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    transition: { duration: 0.3 }
+  }
+};
+
 const PricingPlan: React.FC<PricingPlanProps> = ({ 
   name, 
   description, 
@@ -24,7 +43,15 @@ const PricingPlan: React.FC<PricingPlanProps> = ({
   popular = false, 
   ctaVariant = 'secondary' 
 }) => (
-  <div className={`bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm ${popular ? 'border-2 border-muwakkil-purple shadow-lg relative' : 'border border-gray-100 dark:border-gray-700'}`}>
+  <motion.div 
+    variants={cardVariants}
+    className={`bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm ${popular ? 'border-2 border-muwakkil-purple shadow-lg relative' : 'border border-gray-100 dark:border-gray-700'}`}
+    whileHover={{ 
+      y: -10,
+      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+    }}
+    transition={{ type: "spring", stiffness: 300 }}
+  >
     {popular && (
       <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-muwakkil-purple text-white px-4 py-1 rounded-full text-sm">
         Most Popular
@@ -35,36 +62,70 @@ const PricingPlan: React.FC<PricingPlanProps> = ({
     <div className="mb-6">
       {price}
     </div>
-    <ul className="space-y-3 mb-8">
+    <motion.ul 
+      className="space-y-3 mb-8"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
+    >
       {features.map((feature, index) => (
-        <li key={index} className="flex items-center text-gray-600 dark:text-gray-300">
+        <motion.li 
+          key={index} 
+          variants={listItemVariants}
+          className="flex items-center text-gray-600 dark:text-gray-300"
+        >
           <svg className="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
           {feature}
-        </li>
+        </motion.li>
       ))}
-    </ul>
+    </motion.ul>
     <Link 
       to={ctaLink} 
       className={`block text-center ${
         ctaVariant === 'primary' 
           ? 'bg-muwakkil-purple hover:bg-purple-600 text-white' 
           : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white'
-      } px-6 py-3 rounded-md text-lg font-medium`}
+      } px-6 py-3 rounded-md text-lg font-medium transition-all duration-300`}
     >
       {ctaText}
     </Link>
-  </div>
+  </motion.div>
 );
 
 const PricingSection: React.FC = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   return (
     <section id="pricing" className="py-16 px-4 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-16 dark:text-white">Simple, Transparent Pricing</h2>
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-3xl font-bold text-center mb-16 dark:text-white"
+        >
+          Simple, Transparent Pricing
+        </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
           <PricingPlan 
             name="Starter"
             description="Perfect for exploring"
@@ -112,7 +173,7 @@ const PricingSection: React.FC = () => {
             ctaText="Contact Sales"
             ctaLink="/contact"
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

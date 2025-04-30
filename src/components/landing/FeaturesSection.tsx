@@ -1,19 +1,44 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6
+    }
+  }
+};
 
 const FeatureCard: React.FC<{
   icon: React.ReactNode;
   title: string;
   description: string;
 }> = ({ icon, title, description }) => (
-  <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700">
+  <motion.div 
+    variants={itemVariants}
+    className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow"
+  >
     <div className="w-12 h-12 bg-muwakkil-light rounded-lg flex items-center justify-center mb-6">
       {icon}
     </div>
     <h3 className="text-xl font-bold mb-4 dark:text-white">{title}</h3>
     <p className="text-gray-600 dark:text-gray-300">{description}</p>
-  </div>
+  </motion.div>
 );
 
 const FeaturesSection: React.FC = () => {
@@ -55,9 +80,23 @@ const FeaturesSection: React.FC = () => {
   return (
     <section id="features" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-16 dark:text-white">How Muwakkil Helps Your Business</h2>
+        <motion.h2 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-3xl font-bold text-center mb-16 dark:text-white"
+        >
+          How Muwakkil Helps Your Business
+        </motion.h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-12"
+        >
           {features.map((feature, index) => (
             <FeatureCard 
               key={index} 
@@ -66,13 +105,19 @@ const FeaturesSection: React.FC = () => {
               description={feature.description} 
             />
           ))}
-        </div>
+        </motion.div>
 
-        <div className="text-center mt-16">
-          <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-6 py-3 rounded-md text-lg font-medium">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mt-16"
+        >
+          <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-6 py-3 rounded-md text-lg font-medium transition-colors duration-300">
             Start Using Muwakkil Today
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
