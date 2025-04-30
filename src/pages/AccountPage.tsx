@@ -3,9 +3,10 @@ import React from 'react';
 import ProfileSection from '@/components/account/ProfileSection';
 import SubscriptionSection from '@/components/account/SubscriptionSection';
 import SettingsSection from '@/components/account/SettingsSection';
+import { Profile } from '@/hooks/useProfileState';
 
 const AccountPage: React.FC = () => {
-  const profileData = {
+  const profileData: Profile = {
     name: "Ahmed Al Nakhla",
     email: "ahmed@nakhlatechnologies.com",
     phone: "+971 52 123 4567",
