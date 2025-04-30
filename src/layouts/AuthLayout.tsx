@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from '@/components/ui/button';
 import { MoonIcon, SunIcon } from 'lucide-react';
+import LanguageSwitch from '../components/LanguageSwitch';
 
 const AuthLayout: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -15,19 +16,21 @@ const AuthLayout: React.FC = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="flex justify-center relative">
             <Logo />
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              onClick={toggleTheme} 
-              className="absolute right-0 top-0"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark' ? (
-                <SunIcon className="h-5 w-5" />
-              ) : (
-                <MoonIcon className="h-5 w-5" />
-              )}
-            </Button>
+            <div className="absolute right-0 top-0 flex gap-2">
+              <LanguageSwitch />
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={toggleTheme} 
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? (
+                  <SunIcon className="h-5 w-5" />
+                ) : (
+                  <MoonIcon className="h-5 w-5" />
+                )}
+              </Button>
+            </div>
           </div>
         </div>
 

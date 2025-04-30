@@ -106,6 +106,64 @@
   }
 }
 
+/* RTL Support */
+html[dir="rtl"] {
+  text-align: right;
+}
+
+html[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="rtl"] .ml-1 { margin-left: 0; margin-right: 0.25rem; }
+html[dir="rtl"] .ml-2 { margin-left: 0; margin-right: 0.5rem; }
+html[dir="rtl"] .ml-3 { margin-left: 0; margin-right: 0.75rem; }
+html[dir="rtl"] .ml-4 { margin-left: 0; margin-right: 1rem; }
+html[dir="rtl"] .ml-6 { margin-left: 0; margin-right: 1.5rem; }
+html[dir="rtl"] .ml-7 { margin-left: 0; margin-right: 1.75rem; }
+
+html[dir="rtl"] .mr-1 { margin-right: 0; margin-left: 0.25rem; }
+html[dir="rtl"] .mr-2 { margin-right: 0; margin-left: 0.5rem; }
+html[dir="rtl"] .mr-3 { margin-right: 0; margin-left: 0.75rem; }
+html[dir="rtl"] .mr-4 { margin-right: 0; margin-left: 1rem; }
+html[dir="rtl"] .mr-6 { margin-right: 0; margin-left: 1.5rem; }
+
+html[dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html[dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html[dir="rtl"] .space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+html[dir="rtl"] .rounded-tr-none {
+  border-top-right-radius: 0.375rem;
+  border-top-left-radius: 0;
+}
+
+html[dir="rtl"] .rounded-tl-none {
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0;
+}
+
+html[dir="rtl"] .justify-end {
+  justify-content: flex-start;
+}
+
+html[dir="rtl"] .justify-start {
+  justify-content: flex-end;
+}
+
 .chat-container {
   height: calc(100vh - 140px);
   overflow-y: auto;
@@ -124,4 +182,9 @@
 /* Global text styling for theme consistency */
 p, h1, h2, h3, h4, h5, h6, span, button, a, div {
   @apply text-foreground dark:text-foreground;
+}
+
+/* Arabic Font */
+html[lang="ar"] {
+  font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
 }

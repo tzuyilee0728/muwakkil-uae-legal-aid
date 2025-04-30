@@ -2,26 +2,29 @@
 import React from 'react';
 import PromptSuggestion from '../PromptSuggestion';
 import { TextShimmer } from '../ui/text-shimmer';
+import { useTranslation } from 'react-i18next';
 
 interface ChatPromptSuggestionsProps {
   onSelectPrompt: (message: string) => void;
 }
 
 const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectPrompt }) => {
-  // Dummy data for the consultation prompts
+  const { t } = useTranslation();
+  
+  // Translated prompts
   const consultationPrompts = [
-    '"Is my company eligible for DIFC\'s government grants?"',
-    '"When is the recent tax refund dates?"'
+    t('chatPrompts.consultation.prompt1'),
+    t('chatPrompts.consultation.prompt2')
   ];
   
   const documentPrompts = [
-    '"Check if [upload documents] are correct"',
-    '"Tell me what should I change for [upload documents]"'
+    t('chatPrompts.documents.prompt1'),
+    t('chatPrompts.documents.prompt2')
   ];
   
   const creationPrompts = [
-    '"Create an NDA that apply to Dubai\'s law"',
-    '"Fill a 2025 tax report document"'
+    t('chatPrompts.creation.prompt1'),
+    t('chatPrompts.creation.prompt2')
   ];
 
   return (
@@ -33,12 +36,12 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
             className="text-4xl font-bold [--base-color:theme(colors.purple.500)] [--base-gradient-color:theme(colors.purple.300)] dark:[--base-color:theme(colors.purple.500)] dark:[--base-gradient-color:theme(colors.purple.300)]"
             duration={1.5}
           >
-            Hey, How are you?
+            {t('common.greeting')}
           </TextShimmer>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <PromptSuggestion
-            title="Professional Consultation"
+            title={t('chatPrompts.consultation.title')}
             icon={
               <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -51,7 +54,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
           />
           
           <PromptSuggestion
-            title="Examine Documents"
+            title={t('chatPrompts.documents.title')}
             icon={
               <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -68,7 +71,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
           />
           
           <PromptSuggestion
-            title="Create Documents"
+            title={t('chatPrompts.creation.title')}
             icon={
               <div className="w-16 h-16 rounded-md bg-muwakkil-light dark:bg-sidebar-accent flex items-center justify-center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9b87f5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

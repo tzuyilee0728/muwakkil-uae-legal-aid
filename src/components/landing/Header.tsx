@@ -5,9 +5,12 @@ import Logo from '../Logo';
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from '@/components/ui/button';
+import LanguageSwitch from '../LanguageSwitch';
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
   
   return (
     <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 fixed top-0 left-0 right-0 z-10">
@@ -15,15 +18,17 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center py-4">
           <Logo />
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Login</Link>
-            <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
-              Sign Up
+            <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
+              {t('common.login')}
             </Link>
+            <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
+              {t('common.signup')}
+            </Link>
+            <LanguageSwitch />
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleTheme} 
-              className="mr-2"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? (
@@ -35,11 +40,11 @@ const Header: React.FC = () => {
           </div>
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">
+            <LanguageSwitch />
             <Button 
               variant="ghost" 
               size="icon" 
               onClick={toggleTheme} 
-              className="mr-2"
               aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {theme === 'dark' ? (
