@@ -26,7 +26,7 @@ const Header: React.FC = () => {
           <div className="hidden md:flex items-center space-x-6">
             {isAuthenticated ? (
               <Link to="/app/chat" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
-                {t('header.dashboard')}
+                {t('common.login')}
               </Link>
             ) : (
               <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
