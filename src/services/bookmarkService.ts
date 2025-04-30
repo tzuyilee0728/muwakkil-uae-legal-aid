@@ -9,6 +9,7 @@ export interface Bookmark {
   content: string;
   documentPath?: string;
   documentName?: string;
+  source?: string;  // Added the source property as optional
 }
 
 interface BookmarkState {
