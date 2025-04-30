@@ -21,9 +21,6 @@ const Header: React.FC = () => {
             <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
               {t('common.login')}
             </Link>
-            <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
-              {t('common.signup')}
-            </Link>
             <LanguageSwitch />
             <Button 
               variant="ghost" 

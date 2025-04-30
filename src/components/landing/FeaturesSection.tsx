@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -114,8 +115,10 @@ const FeaturesSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-6 py-3 rounded-md text-lg font-medium transition-colors duration-300">
-            Start Using Muwakkil Today
+          <Link to="/app">
+            <RainbowButton>
+              Start Using Muwakkil Today
+            </RainbowButton>
           </Link>
         </motion.div>
       </div>
