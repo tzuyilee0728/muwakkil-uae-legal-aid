@@ -17,7 +17,8 @@ import AppLayout from "./layouts/AppLayout";
 import AuthLayout from "./layouts/AuthLayout";
 import NotFound from "./pages/NotFound";
 
-// Set isAuthenticated to true to bypass authentication
+// This would come from your authentication system
+// For now, we'll mock it
 const isAuthenticated = true;
 
 const queryClient = new QueryClient();
@@ -29,10 +30,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Redirect root to app/chat directly */}
-          <Route path="/" element={<Navigate to="/app/chat" replace />} />
+          <Route path="/" element={<LandingPage />} />
           
-          {/* Auth routes - kept for reference but will be bypassed */}
+          {/* Auth routes */}
           <Route element={<AuthLayout />}>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
@@ -41,7 +41,7 @@ const App = () => (
           {/* Disclaimer page after login */}
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           
-          {/* App routes - no longer protected */}
+          {/* App routes - protected in a real app */}
           <Route path="/app" element={<AppLayout />}>
             {/* Redirect root /app directly to chat */}
             <Route index element={<Navigate to="/app/chat" replace />} />
@@ -52,7 +52,7 @@ const App = () => (
             <Route path="find-lawyer" element={<FindLawyerPage />} />
           </Route>
           
-          {/* Add a redirect from /chat to /app/chat for direct access */}
+          {/* Add a redirect from / to /app/chat for direct access */}
           <Route path="/chat" element={<Navigate to="/app/chat" replace />} />
           
           <Route path="*" element={<NotFound />} />

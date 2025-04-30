@@ -23,18 +23,6 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  // If no messages, show a welcome message
-  if (messages.length === 0 && !loading) {
-    return (
-      <div className="flex-1 overflow-y-auto pb-24 flex items-center justify-center">
-        <div className="text-center max-w-md mx-auto p-6">
-          <h2 className="text-2xl font-bold mb-4">{t('chat.welcome.title')}</h2>
-          <p className="text-muted-foreground mb-6">{t('chat.welcome.description')}</p>
-        </div>
-      </div>
-    );
-  }
-
   return <div className="flex-1 overflow-y-auto pb-24">
       {messages.map(message => <ChatMessage key={message.id} message={message} actionLogSteps={message.sender === 'ai' ? actionLogSteps : []} onBookmark={onBookmark} onFeedback={onFeedback} />)}
       
