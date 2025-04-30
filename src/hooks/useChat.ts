@@ -21,7 +21,7 @@ export const useChat = (chatId: string | null) => {
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
   const { toast } = useToast();
-  const { addBookmark } = useBookmarkStore();
+  const { addBookmark, removeBookmark } = useBookmarkStore();
   
   // Load chat history on mount
   useEffect(() => {
@@ -70,10 +70,17 @@ export const useChat = (chatId: string | null) => {
     );
   };
 
-  const handleFileUpload = (file: File) => {
+  const handleFileUpload = (files: File[]) => {
+    if (files.length === 0) return;
+    
+    const fileNames = files.map(file => file.name).join(", ");
+    const fileCountText = files.length === 1 
+      ? "Uploaded file:" 
+      : `Uploaded ${files.length} files:`;
+    
     const newMessage: Message = {
       id: uuidv4(),
-      content: `Uploaded file: ${file.name}`,
+      content: `${fileCountText} ${fileNames}`,
       sender: 'user',
       timestamp: new Date(),
     };
@@ -81,8 +88,8 @@ export const useChat = (chatId: string | null) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     
     toast({
-      title: "File Uploaded",
-      description: `${file.name} has been uploaded successfully.`,
+      title: "Files Uploaded",
+      description: `${files.length} file${files.length > 1 ? 's' : ''} uploaded successfully.`,
     });
   };
 
