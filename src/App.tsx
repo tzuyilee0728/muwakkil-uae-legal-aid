@@ -30,6 +30,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Landing page is always shown at the root, regardless of auth state */}
           <Route path="/" element={<LandingPage />} />
           
           {/* Auth routes */}
@@ -52,7 +53,7 @@ const App = () => (
             <Route path="find-lawyer" element={<FindLawyerPage />} />
           </Route>
           
-          {/* Add a redirect from / to /app/chat for direct access */}
+          {/* Add a redirect from /chat to /app/chat for direct access */}
           <Route path="/chat" element={<Navigate to="/app/chat" replace />} />
           
           <Route path="*" element={<NotFound />} />
