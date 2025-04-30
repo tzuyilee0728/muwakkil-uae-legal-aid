@@ -7,9 +7,7 @@ import {
   Copy, 
   Bookmark, 
   Check, 
-  BookmarkCheck,
-  ThumbsUpFill,
-  ThumbsDownFill
+  BookmarkCheck 
 } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { HoverButton } from "@/components/ui/hover-button";
