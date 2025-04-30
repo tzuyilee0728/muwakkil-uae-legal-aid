@@ -116,9 +116,9 @@ const KnowledgePage: React.FC = () => {
                     </button>
                   </div>
                   
-                  {/* Content preview */}
-                  <div className="px-4 pb-4">
-                    {item.type === 'text' && item.content && (
+                  {/* Content preview - for text only */}
+                  {item.type === 'text' && item.content && (
+                    <div className="px-4 pb-4">
                       <ScrollArea className="h-40 rounded-md border p-2 bg-gray-50 dark:bg-gray-900">
                         <div className="p-2">
                           <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
@@ -126,38 +126,18 @@ const KnowledgePage: React.FC = () => {
                           </p>
                         </div>
                       </ScrollArea>
-                    )}
-                    
-                    {item.type === 'file' && item.filePath && (
-                      <div className="mt-2">
-                        <div className="flex items-center gap-2 mb-2">
-                          <File size={16} className="text-gray-500" />
-                          <span className="text-sm text-gray-500">File preview</span>
-                        </div>
-                        <div className="bg-gray-50 dark:bg-gray-900 rounded-md p-2 border">
-                          {item.filePath.toLowerCase().endsWith('.pdf') ? (
-                            <div className="flex items-center justify-center h-40 bg-gray-100 dark:bg-gray-800 rounded">
-                              <p className="text-sm text-gray-500">PDF Document</p>
-                            </div>
-                          ) : item.filePath.match(/\.(jpeg|jpg|png|gif|webp)$/i) ? (
-                            <div className="h-40">
-                              <AspectRatio ratio={16/9} className="bg-gray-100 dark:bg-gray-800">
-                                <img 
-                                  src={item.filePath} 
-                                  alt={`Preview of ${item.name}`}
-                                  className="object-contain w-full h-full rounded"
-                                />
-                              </AspectRatio>
-                            </div>
-                          ) : (
-                            <div className="flex items-center justify-center h-40 bg-gray-100 dark:bg-gray-800 rounded">
-                              <p className="text-sm text-gray-500">Document preview not available</p>
-                            </div>
-                          )}
-                        </div>
+                    </div>
+                  )}
+                  
+                  {/* For files, just display the file name without preview */}
+                  {item.type === 'file' && item.filePath && (
+                    <div className="px-4 pb-4">
+                      <div className="flex items-center gap-2 mb-2">
+                        <File size={16} className="text-gray-500" />
+                        <span className="text-sm text-gray-500">File uploaded</span>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </Card>
               ))}
             </div>
