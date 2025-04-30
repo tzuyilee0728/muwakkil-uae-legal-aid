@@ -16,9 +16,7 @@ const HeroSection: React.FC = () => {
         delay: 0.3,
         duration: 0.8,
         ease: "easeInOut"
-      }} className="text-4xl md:text-5xl font-bold mb-6 text-indigo-950 mx-0 px-0 text-center lg:text-6xl">
-          Your super startup's legal assistant
-        </motion.h1>
+      }} className="text-4xl md:text-5xl font-bold mb-6 text-indigo-950 mx-0 px-0 text-center lg:text-6xl">Empowering UAE Founders with Smart Legal Support</motion.h1>
         
         <motion.p initial={{
         opacity: 0,
