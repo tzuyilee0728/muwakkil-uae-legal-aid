@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Logo from './Logo';
-import { BookOpen, Bookmark, User, Scale, MessageSquare, LogOut } from 'lucide-react';
+import { BookOpen, Bookmark, User, Scale, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface NavItem {
@@ -28,7 +27,6 @@ const Sidebar: React.FC = () => {
   
   const currentChatId = searchParams.get('id');
   const isOnChatPage = location.pathname === '/app/chat';
-  const isOnAccountPage = location.pathname === '/app/account';
 
   // Main navigation items
   const navItems: NavItem[] = [
@@ -88,17 +86,6 @@ const Sidebar: React.FC = () => {
     });
   };
 
-  const handleSignOut = () => {
-    // In a real app, you would call your auth service's logout method here
-    toast({
-      title: t('sidebar.signedOut'),
-      description: t('sidebar.signedOutDesc')
-    });
-
-    // Navigate to home page after signing out
-    navigate('/');
-  };
-
   return (
     <div className="w-64 h-screen border-r border-gray-200 bg-white flex flex-col dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200">
       <div className="p-4">
@@ -155,16 +142,6 @@ const Sidebar: React.FC = () => {
           <span className="mr-2 text-slate-50">+</span>
           {t('sidebar.newChat')}
         </button>
-        
-        {isOnAccountPage && (
-          <button 
-            onClick={handleSignOut} 
-            className="w-full flex items-center justify-center px-4 text-red-600 hover:bg-red-50 rounded-md transition-colors py-[8px] border border-red-200 dark:hover:bg-red-900/20 dark:border-red-800"
-          >
-            <LogOut size={18} className="mr-2" />
-            {t('common.signOut')}
-          </button>
-        )}
       </div>
     </div>
   );
