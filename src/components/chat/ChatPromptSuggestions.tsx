@@ -30,7 +30,7 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
         <div className="text-center mb-12">
           <TextShimmer
             as="h1"
-            className="text-4xl font-bold [--base-color:theme(colors.red.500)] [--base-gradient-color:theme(colors.red.300)] dark:[--base-color:theme(colors.red.500)] dark:[--base-gradient-color:theme(colors.red.300)]"
+            className="text-4xl font-bold [--base-color:theme(colors.purple.500)] [--base-gradient-color:theme(colors.purple.300)] dark:[--base-color:theme(colors.purple.500)] dark:[--base-gradient-color:theme(colors.purple.300)]"
             duration={1.5}
           >
             Hey, How are you?
