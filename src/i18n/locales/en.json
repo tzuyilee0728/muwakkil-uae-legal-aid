@@ -1,3 +1,4 @@
+
 {
   "common": {
     "login": "Login",
@@ -133,13 +134,5 @@
   },
   "testimonials": {
     "title": "What Our Customers Say"
-  },
-  "header": {
-    "dashboard": "Dashboard"
-  },
-  "home": {
-    "welcome_back": "Welcome back to Muwakkil!",
-    "get_started": "Ready to get started with Muwakkil?",
-    "go_to_app": "Go to Dashboard"
   }
 }

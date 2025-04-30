@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Logo from './Logo';
-import { BookOpen, Bookmark, User, Scale, MessageSquare, LogOut, Home } from 'lucide-react';
+import { BookOpen, Bookmark, User, Scale, MessageSquare, LogOut } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface NavItem {
@@ -31,12 +31,7 @@ const Sidebar: React.FC = () => {
   const isOnAccountPage = location.pathname === '/app/account';
 
   // Main navigation items
-  const navItems = [
-    {
-      name: t('sidebar.home'),
-      icon: <Home size={20} />,
-      path: '/home'
-    },
+  const navItems: NavItem[] = [
     {
       name: t('sidebar.knowledge'),
       icon: <BookOpen size={20} />,
