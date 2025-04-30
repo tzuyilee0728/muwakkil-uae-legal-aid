@@ -1,6 +1,11 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 const Footer: React.FC = () => {
+  const { t } = useTranslation();
+  
   return <footer className="bg-gray-800 text-white py-12 px-4">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         <div>
@@ -14,12 +19,12 @@ const Footer: React.FC = () => {
         </div>
         
         <div>
-          <h4 className="text-lg font-medium mb-4 text-slate-50">Company</h4>
+          <h4 className="text-lg font-medium mb-4 text-slate-50">{t('landing.footer.about')}</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-400 hover:text-white">About Us</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Careers</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Blog</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.about')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.careers')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.blog')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.contact')}</a></li>
           </ul>
         </div>
         
@@ -44,7 +49,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-        <p className="text-slate-50">&copy; 2025 Muwakkil. All rights reserved.</p>
+        <p className="text-slate-50">&copy; 2025 Muwakkil. {t('landing.footer.rights')}</p>
       </div>
     </footer>;
 };

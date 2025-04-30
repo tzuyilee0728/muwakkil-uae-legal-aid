@@ -105,5 +105,8 @@
       "feature4": "Custom integration",
       "ctaText": "Contact Sales"
     }
+  },
+  "testimonials": {
+    "title": "What Our Customers Say"
   }
 }

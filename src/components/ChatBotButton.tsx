@@ -4,6 +4,7 @@ import { MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslation } from 'react-i18next';
 
 interface ChatBotButtonProps {
   isAuthenticated?: boolean;
@@ -12,13 +13,14 @@ interface ChatBotButtonProps {
 const ChatBotButton: React.FC<ChatBotButtonProps> = ({ isAuthenticated = false }) => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleChatClick = () => {
     if (isAuthenticated) {
       navigate('/app/chat');
     } else {
       toast({
-        title: "Authentication Required",
+        title: t('common.login'),
         description: "Please sign in to start a chat and save your history",
         action: (
           <Button 
@@ -26,7 +28,7 @@ const ChatBotButton: React.FC<ChatBotButtonProps> = ({ isAuthenticated = false }
             onClick={() => navigate('/login')}
             className="bg-muwakkil-purple hover:bg-muwakkil-purple/90"
           >
-            Sign In
+            {t('auth.signIn')}
           </Button>
         )
       });

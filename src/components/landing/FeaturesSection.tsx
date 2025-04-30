@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { RainbowButton } from '@/components/ui/rainbow-button';
+import { useTranslation } from 'react-i18next';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,6 +44,8 @@ const FeatureCard: React.FC<{
 );
 
 const FeaturesSection: React.FC = () => {
+  const { t } = useTranslation();
+  
   const features = [
     {
       icon: (
@@ -50,8 +53,8 @@ const FeaturesSection: React.FC = () => {
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
       ),
-      title: "Conversational Legal Help",
-      description: "Ask any legal question about UAE business law and get instant, accurate responses backed by Federal Law No. 32/2021 and DED regulations."
+      title: t('landing.features.consultationTitle'),
+      description: t('landing.features.consultationDesc')
     },
     {
       icon: (
@@ -63,8 +66,8 @@ const FeaturesSection: React.FC = () => {
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
       ),
-      title: "Smart Document Review",
-      description: "Upload contracts and legal documents to automatically flag non-compliant clauses and receive guidance on how to fix them."
+      title: t('landing.features.documentTitle'),
+      description: t('landing.features.documentDesc')
     },
     {
       icon: (
@@ -73,8 +76,8 @@ const FeaturesSection: React.FC = () => {
           <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
         </svg>
       ),
-      title: "Jurisdiction-Specific Templates",
-      description: "Generate legally compliant documents tailored to your specific business needs in Dubai Mainland, DIFC, or UAE Free Zones."
+      title: t('landing.features.creationTitle'),
+      description: t('landing.features.creationDesc')
     }
   ];
 
@@ -88,7 +91,7 @@ const FeaturesSection: React.FC = () => {
           viewport={{ once: true }}
           className="text-3xl font-bold text-center mb-16 dark:text-white"
         >
-          How Muwakkil Helps Your Business
+          {t('landing.features.title')}
         </motion.h2>
         
         <motion.div 
@@ -117,7 +120,7 @@ const FeaturesSection: React.FC = () => {
         >
           <Link to="/app">
             <RainbowButton>
-              Start Using Muwakkil Today
+              {t('landing.features.startUsing')}
             </RainbowButton>
           </Link>
         </motion.div>
