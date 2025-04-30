@@ -71,5 +71,39 @@
       "prompt1": "Create an NDA that apply to Dubai's law",
       "prompt2": "Fill a 2025 tax report document"
     }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "mostPopular": "Most Popular",
+    "starter": {
+      "name": "Starter",
+      "description": "Perfect for exploring",
+      "price": "Free",
+      "feature1": "10 legal questions per month",
+      "feature2": "3 document reviews",
+      "feature3": "Basic templates",
+      "ctaText": "Get Started"
+    },
+    "professional": {
+      "name": "Professional", 
+      "description": "For growing businesses",
+      "price": "199 AED",
+      "period": "/month",
+      "feature1": "Unlimited legal questions",
+      "feature2": "25 document reviews",
+      "feature3": "All templates",
+      "feature4": "Priority support",
+      "ctaText": "Subscribe Now"
+    },
+    "enterprise": {
+      "name": "Enterprise",
+      "description": "For larger organizations",
+      "price": "Custom",
+      "feature1": "Everything in Professional",
+      "feature2": "Dedicated account manager",
+      "feature3": "API access",
+      "feature4": "Custom integration",
+      "ctaText": "Contact Sales"
+    }
   }
 }
