@@ -1,3 +1,4 @@
+
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { useBookmarks } from '@/hooks/useBookmarks';
@@ -21,7 +22,7 @@ const BookmarksPage: React.FC = () => {
 
   return (
     <div className="flex-1 flex flex-col h-full">
-      <PageHeader title="Bookmarks" />
+      <PageHeader title={t('bookmarks.title', 'Bookmarks')} />
       <div className="flex-1 overflow-auto p-6">
         <div className="max-w-4xl mx-auto">
           {bookmarks.length > 0 ? (
@@ -48,11 +49,13 @@ const BookmarksPage: React.FC = () => {
                   <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700/50 rounded border border-gray-100 dark:border-gray-700">
                     <p className="text-gray-800 dark:text-gray-200">{bookmark.content}</p>
                   </div>
-                  <div className="mt-2 flex">
-                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
-                      {bookmark.source}
-                    </span>
-                  </div>
+                  {bookmark.source && (
+                    <div className="mt-2 flex">
+                      <span className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300">
+                        {bookmark.source}
+                      </span>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -61,9 +64,9 @@ const BookmarksPage: React.FC = () => {
               <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trash2 className="h-8 w-8 text-gray-400" />
               </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">No bookmarks yet</h3>
+              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{t('bookmarks.empty', 'No bookmarks yet')}</h3>
               <p className="mt-1 text-gray-500 dark:text-gray-400">
-                Bookmark important information from your chats to access them quickly later.
+                {t('bookmarks.emptyDesc', 'Bookmark important information from your chats to access them quickly later.')}
               </p>
             </div>
           )}
