@@ -56,18 +56,15 @@ const HeroSection: React.FC = () => {
             y: 0
           }} 
           transition={{
-            delay: 1.3, // Added even more delay for the buttons
+            delay: 1.3, // Added even more delay for the button
             duration: 0.6,
             ease: "easeOut"
           }} 
-          className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
+          className="flex justify-center"
         >
           <Link to="/app">
             <RainbowButton>Start for Free</RainbowButton>
           </Link>
-          <a href="#features" className="border border-gray-300 bg-white dark:bg-transparent dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 px-8 py-4 rounded-md text-lg font-medium">
-            Learn More
-          </a>
         </motion.div>
       </div>
     </AuroraBackground>;
