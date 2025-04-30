@@ -18,8 +18,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ title, timestamp }) => {
   const { t } = useTranslation();
   
   return (
-    <div className="border-b border-gray-200 dark:border-gray-700 p-4 bg-background dark:bg-background">
-      <div className="max-w-4xl mx-auto px-4 flex justify-between items-center">
+    <div className="border-b border-gray-200 dark:border-gray-700 bg-background dark:bg-background">
+      <div className="max-w-4xl mx-auto px-4 flex justify-between items-center py-3">
         <div>
           <h1 className="text-xl font-medium text-foreground dark:text-foreground">
             {title === "New Chat" ? t('common.newChat') : title}

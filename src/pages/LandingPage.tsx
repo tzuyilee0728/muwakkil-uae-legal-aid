@@ -11,10 +11,12 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <Header />
-      <HeroSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <PricingSection />
+      <div className="pt-16"> {/* Add padding top to account for fixed header */}
+        <HeroSection />
+        <FeaturesSection />
+        <TestimonialsSection />
+        <PricingSection />
+      </div>
       <Footer />
     </div>
   );
