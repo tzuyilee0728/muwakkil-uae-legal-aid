@@ -1,14 +1,12 @@
 
 import React, { useState } from 'react';
-import { User, Settings, LogOut, Bell, Shield, Upload, Check } from 'lucide-react';
+import { User, Settings, Bell, Shield, Upload, Check } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 
 const AccountPage: React.FC = () => {
-  const navigate = useNavigate();
   const { toast } = useToast();
   
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -23,14 +21,6 @@ const AccountPage: React.FC = () => {
   });
   
   const [profileImage, setProfileImage] = useState<string | null>(null);
-  
-  const handleSignOut = () => {
-    toast({
-      title: "Signed Out",
-      description: "You have been signed out successfully",
-    });
-    navigate('/');
-  };
   
   const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -218,15 +208,6 @@ const AccountPage: React.FC = () => {
                     <Settings size={20} className="text-gray-600 mr-3 dark:text-gray-400" />
                     <span>Preferences</span>
                   </a>
-                </li>
-                <li>
-                  <button 
-                    onClick={handleSignOut}
-                    className="flex items-center w-full text-left px-4 py-3 text-red-600 rounded-md hover:bg-red-50 dark:hover:bg-red-900/20"
-                  >
-                    <LogOut size={20} className="mr-3" />
-                    <span>Sign Out</span>
-                  </button>
                 </li>
               </ul>
             </nav>

@@ -127,8 +127,6 @@ const BookmarksPage: React.FC = () => {
                     {expandedBookmarkId === bookmark.id ? 'Show less' : 'Show more'}
                   </button>
                 </div>
-                
-                {/* Removed the chat bubble icon section that was here */}
               </div>
             ))}
           </div>
