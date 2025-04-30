@@ -30,20 +30,48 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Landing page is always shown at the root, regardless of auth state */}
-          <Route path="/" element={<LandingPage />} />
+          {/* Root path - show landing page if not authenticated, otherwise redirect to app */}
+          <Route 
+            path="/" 
+            element={
+              isAuthenticated ? 
+                <Navigate to="/app" replace /> : 
+                <LandingPage />
+            } 
+          />
           
-          {/* Auth routes */}
+          {/* Auth routes - accessible only when not authenticated */}
           <Route element={<AuthLayout />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
+            <Route 
+              path="/login" 
+              element={
+                isAuthenticated ? 
+                  <Navigate to="/app" replace /> : 
+                  <LoginPage />
+              } 
+            />
+            <Route 
+              path="/signup" 
+              element={
+                isAuthenticated ? 
+                  <Navigate to="/app" replace /> : 
+                  <SignupPage />
+              } 
+            />
           </Route>
           
           {/* Disclaimer page after login */}
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           
           {/* App routes - protected in a real app */}
-          <Route path="/app" element={<AppLayout />}>
+          <Route 
+            path="/app" 
+            element={
+              isAuthenticated ? 
+                <AppLayout /> : 
+                <Navigate to="/" replace />
+            }
+          >
             {/* Redirect root /app directly to chat */}
             <Route index element={<Navigate to="/app/chat" replace />} />
             <Route path="chat" element={<ChatPage />} />
