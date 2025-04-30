@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -16,6 +17,7 @@ interface ActionLogProps {
 
 const ActionLog: React.FC<ActionLogProps> = ({ steps }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
   
   if (steps.length === 0) return null;
   
@@ -28,7 +30,7 @@ const ActionLog: React.FC<ActionLogProps> = ({ steps }) => {
       >
         <CollapsibleTrigger asChild>
           <button className="flex items-center space-x-2 py-1 px-3 text-sm text-gray-600 dark:text-muted-foreground rounded hover:bg-gray-100 dark:hover:bg-muted w-full">
-            <span>Action Log</span>
+            <span>{t('chat.actionLog')}</span>
             {isOpen ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
           </button>
         </CollapsibleTrigger>

@@ -6,7 +6,8 @@
     "newChat": "New Chat",
     "greeting": "Hey, How are you?",
     "startForFree": "Start for Free",
-    "learnMore": "Learn More"
+    "learnMore": "Learn More",
+    "signOut": "Sign Out"
   },
   "auth": {
     "email": "Email",
@@ -22,7 +23,16 @@
     "sendMessage": "Send message",
     "typeMessage": "Type a message...",
     "thinking": "Thinking and analyzing your request...",
-    "searching": "Searching through knowledge base and preparing a response"
+    "searching": "Searching through knowledge base and preparing a response",
+    "actionLog": "Action Log",
+    "uploadedFile": "Uploaded file:",
+    "uploadedFiles": "Uploaded {count} files:",
+    "filesUploaded": "Files Uploaded",
+    "filesUploadedDesc": "{count} file(s) uploaded successfully.",
+    "bookmarked": "Bookmarked",
+    "bookmarkedDesc": "Message has been saved to your bookmarks.",
+    "feedbackReceived": "Feedback Received",
+    "feedbackReceivedDesc": "Thank you for your {type} feedback."
   },
   "sidebar": {
     "newChat": "New Chat",
@@ -30,7 +40,12 @@
     "knowledge": "Knowledge Base",
     "bookmarks": "Bookmarks",
     "findLawyer": "Find a Lawyer",
-    "account": "Account"
+    "account": "Account",
+    "pro": "Pro",
+    "signedOut": "Signed Out",
+    "signedOutDesc": "You have been signed out successfully",
+    "newChatStarted": "New Chat",
+    "newChatStartedDesc": "Started a new chat session"
   },
   "landing": {
     "hero": {

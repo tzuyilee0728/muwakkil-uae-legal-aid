@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation, useSearchParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from './Logo';
 import { BookOpen, Bookmark, User, Scale, MessageSquare, LogOut } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -19,6 +20,7 @@ interface ChatItem {
 }
 
 const Sidebar: React.FC = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -31,25 +33,25 @@ const Sidebar: React.FC = () => {
   // Main navigation items
   const navItems: NavItem[] = [
     {
-      name: 'Knowledge',
+      name: t('sidebar.knowledge'),
       icon: <BookOpen size={20} />,
       path: '/app/knowledge'
     },
     {
-      name: 'Bookmarks',
+      name: t('sidebar.bookmarks'),
       icon: <Bookmark size={20} />,
       path: '/app/bookmarks'
     },
     {
-      name: 'Account',
+      name: t('sidebar.account'),
       icon: <User size={20} />,
       path: '/app/account'
     },
     {
-      name: 'Find a lawyer',
+      name: t('sidebar.findLawyer'),
       icon: <Scale size={20} />,
       path: '/app/find-lawyer',
-      badge: 'Pro'
+      badge: t('sidebar.pro')
     }
   ];
 
@@ -81,16 +83,16 @@ const Sidebar: React.FC = () => {
     // Clear any existing chat ID by navigating to /app/chat without params
     navigate('/app/chat');
     toast({
-      title: "New Chat",
-      description: "Started a new chat session"
+      title: t('sidebar.newChatStarted'),
+      description: t('sidebar.newChatStartedDesc')
     });
   };
 
   const handleSignOut = () => {
     // In a real app, you would call your auth service's logout method here
     toast({
-      title: "Signed Out",
-      description: "You have been signed out successfully"
+      title: t('sidebar.signedOut'),
+      description: t('sidebar.signedOutDesc')
     });
 
     // Navigate to home page after signing out
@@ -151,7 +153,7 @@ const Sidebar: React.FC = () => {
           className="w-full flex items-center justify-center px-4 bg-[#855ECB] hover:bg-[#7346b5] text-white rounded-md transition-colors py-[8px] dark:bg-muwakkil-purple dark:hover:bg-muwakkil-purple/80"
         >
           <span className="mr-2 text-slate-50">+</span>
-          New chat
+          {t('sidebar.newChat')}
         </button>
         
         {isOnAccountPage && (
@@ -160,7 +162,7 @@ const Sidebar: React.FC = () => {
             className="w-full flex items-center justify-center px-4 text-red-600 hover:bg-red-50 rounded-md transition-colors py-[8px] border border-red-200 dark:hover:bg-red-900/20 dark:border-red-800"
           >
             <LogOut size={18} className="mr-2" />
-            Sign Out
+            {t('common.signOut')}
           </button>
         )}
       </div>

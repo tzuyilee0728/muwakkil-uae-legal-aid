@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from '@/hooks/use-toast';
 import { useBookmarkStore } from '../services/bookmarkService';
@@ -16,6 +17,7 @@ import { simulateAIResponse } from '../services/messageResponseService';
 export type { Message, ActionLogStep } from '../types/chat';
 
 export const useChat = (chatId: string | null) => {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
@@ -75,8 +77,8 @@ export const useChat = (chatId: string | null) => {
     
     const fileNames = files.map(file => file.name).join(", ");
     const fileCountText = files.length === 1 
-      ? "Uploaded file:" 
-      : `Uploaded ${files.length} files:`;
+      ? t('chat.uploadedFile') 
+      : t('chat.uploadedFiles', { count: files.length });
     
     const newMessage: Message = {
       id: uuidv4(),
@@ -88,8 +90,8 @@ export const useChat = (chatId: string | null) => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     
     toast({
-      title: "Files Uploaded",
-      description: `${files.length} file${files.length > 1 ? 's' : ''} uploaded successfully.`,
+      title: t('chat.filesUploaded'),
+      description: t('chat.filesUploadedDesc', { count: files.length }),
     });
   };
 
@@ -114,23 +116,23 @@ export const useChat = (chatId: string | null) => {
       });
       
       toast({
-        title: "Bookmarked",
-        description: "Message has been saved to your bookmarks.",
+        title: t('chat.bookmarked'),
+        description: t('chat.bookmarkedDesc'),
       });
     }
   };
 
   const handleFeedback = (type: 'positive' | 'negative') => {
     toast({
-      title: "Feedback Received",
-      description: `Thank you for your ${type} feedback.`,
+      title: t('chat.feedbackReceived'),
+      description: t('chat.feedbackReceivedDesc', { type }),
     });
   };
 
   // Compute the current chat title
   const currentChatTitle = chatId 
     ? "Eligibility check for DIFC's government grants" 
-    : "New Chat";
+    : t('sidebar.newChat');
 
   return {
     messages,

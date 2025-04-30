@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ChatMessage from '../ChatMessage';
 import { Message, ActionLogStep } from '../../types/chat';
 import { TextShimmer } from '@/components/ui/text-shimmer';
@@ -20,6 +21,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   onBookmark,
   onFeedback
 }) => {
+  const { t } = useTranslation();
+
   return <div className="flex-1 overflow-y-auto pb-24">
       {messages.map(message => <ChatMessage key={message.id} message={message} actionLogSteps={message.sender === 'ai' ? actionLogSteps : []} onBookmark={onBookmark} onFeedback={onFeedback} />)}
       
@@ -35,13 +38,13 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                   className="font-medium text-base text-foreground"
                   duration={1.5}
                 >
-                  Thinking and analyzing your request...
+                  {t('chat.thinking')}
                 </TextShimmer>
                 <TextShimmer
                   className="text-sm text-muted-foreground"
                   duration={2}
                 >
-                  Searching through knowledge base and preparing a response
+                  {t('chat.searching')}
                 </TextShimmer>
               </div>
             </div>

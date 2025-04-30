@@ -6,7 +6,8 @@
     "newChat": "محادثة جديدة",
     "greeting": "مرحبًا، كيف حالك؟",
     "startForFree": "ابدأ مجانًا",
-    "learnMore": "اعرف المزيد"
+    "learnMore": "اعرف المزيد",
+    "signOut": "تسجيل الخروج"
   },
   "auth": {
     "email": "البريد الإلكتروني",
@@ -22,7 +23,16 @@
     "sendMessage": "إرسال",
     "typeMessage": "اكتب رسالة...",
     "thinking": "جاري التفكير وتحليل طلبك...",
-    "searching": "البحث في قاعدة المعرفة وإعداد الرد"
+    "searching": "البحث في قاعدة المعرفة وإعداد الرد",
+    "actionLog": "سجل الإجراءات",
+    "uploadedFile": "تم تحميل الملف:",
+    "uploadedFiles": "تم تحميل {count} ملفات:",
+    "filesUploaded": "تم تحميل الملفات",
+    "filesUploadedDesc": "تم تحميل {count} ملف (ملفات) بنجاح.",
+    "bookmarked": "تمت الإضافة للإشارات المرجعية",
+    "bookmarkedDesc": "تمت إضافة الرسالة إلى الإشارات المرجعية الخاصة بك.",
+    "feedbackReceived": "تم استلام التعليق",
+    "feedbackReceivedDesc": "شكرًا لك على تعليقك {type}."
   },
   "sidebar": {
     "newChat": "محادثة جديدة",
@@ -30,7 +40,12 @@
     "knowledge": "قاعدة المعرفة",
     "bookmarks": "العلامات المرجعية",
     "findLawyer": "ابحث عن محامي",
-    "account": "الحساب"
+    "account": "الحساب",
+    "pro": "محترف",
+    "signedOut": "تم تسجيل الخروج",
+    "signedOutDesc": "تم تسجيل خروجك بنجاح",
+    "newChatStarted": "محادثة جديدة",
+    "newChatStartedDesc": "تم بدء جلسة محادثة جديدة"
   },
   "landing": {
     "hero": {
