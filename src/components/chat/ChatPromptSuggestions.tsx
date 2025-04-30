@@ -1,6 +1,7 @@
 
 import React from 'react';
 import PromptSuggestion from '../PromptSuggestion';
+import { TextShimmer } from '../ui/text-shimmer';
 
 interface ChatPromptSuggestionsProps {
   onSelectPrompt: (message: string) => void;
@@ -26,6 +27,15 @@ const ChatPromptSuggestions: React.FC<ChatPromptSuggestionsProps> = ({ onSelectP
   return (
     <div className="flex-1 overflow-hidden">
       <div className="h-full flex flex-col justify-center max-w-5xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <TextShimmer
+            as="h1"
+            className="text-4xl font-bold [--base-color:theme(colors.red.500)] [--base-gradient-color:theme(colors.red.300)] dark:[--base-color:theme(colors.red.500)] dark:[--base-gradient-color:theme(colors.red.300)]"
+            duration={1.5}
+          >
+            Hey, How are you?
+          </TextShimmer>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <PromptSuggestion
             title="Professional Consultation"
