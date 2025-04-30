@@ -26,6 +26,7 @@ const Sidebar: React.FC = () => {
   
   const currentChatId = searchParams.get('id');
   const isOnChatPage = location.pathname === '/app/chat';
+  const isOnAccountPage = location.pathname === '/app/account';
 
   // Main navigation items
   const navItems: NavItem[] = [
@@ -153,7 +154,7 @@ const Sidebar: React.FC = () => {
           New chat
         </button>
         
-        {isOnChatPage && (
+        {isOnAccountPage && (
           <button 
             onClick={handleSignOut} 
             className="w-full flex items-center justify-center px-4 text-red-600 hover:bg-red-50 rounded-md transition-colors py-[8px] border border-red-200 dark:hover:bg-red-900/20 dark:border-red-800"
