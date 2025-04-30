@@ -1,19 +1,13 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { motion } from 'framer-motion';
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
 import { MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 const LandingPage: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
@@ -175,7 +169,10 @@ const LandingPage: React.FC = () => {
                 "Muwakkil has been a game-changer for our startup. We've saved thousands of dirhams in legal fees while ensuring our contracts are fully compliant."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full mr-4"></div>
+                <Avatar className="h-12 w-12 mr-4">
+                  <AvatarImage src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=120&h=120" />
+                  <AvatarFallback>SA</AvatarFallback>
+                </Avatar>
                 <div>
                   <h4 className="font-medium dark:text-white">Sarah Al Mansouri</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">CEO, TechStart UAE</p>
@@ -189,7 +186,10 @@ const LandingPage: React.FC = () => {
                 "The document review feature caught several non-compliant clauses that could have caused us problems later. Highly recommend for any business in UAE."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full mr-4"></div>
+                <Avatar className="h-12 w-12 mr-4">
+                  <AvatarImage src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=120&h=120" />
+                  <AvatarFallback>AH</AvatarFallback>
+                </Avatar>
                 <div>
                   <h4 className="font-medium dark:text-white">Ahmed Hassan</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Legal Director, GrowFast</p>
@@ -203,7 +203,10 @@ const LandingPage: React.FC = () => {
                 "As someone new to UAE business laws, Muwakkil has been my go-to resource. The AI assistant answers my questions accurately and in plain language."
               </p>
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-full mr-4"></div>
+                <Avatar className="h-12 w-12 mr-4">
+                  <AvatarImage src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=120&h=120" />
+                  <AvatarFallback>EP</AvatarFallback>
+                </Avatar>
                 <div>
                   <h4 className="font-medium dark:text-white">Emma Parker</h4>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Founder, ExpatsConnect</p>
