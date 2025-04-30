@@ -26,43 +26,6 @@ const LandingPage: React.FC = () => {
           <div className="flex justify-between items-center py-4">
             <Logo />
             <div className="hidden md:flex items-center space-x-6">
-              <NavigationMenu>
-                <NavigationMenuList>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Solutions</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="grid grid-cols-2 gap-3 p-4 w-[400px]">
-                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
-                          <h5 className="font-medium text-gray-900 dark:text-white">Document Review</h5>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">Get your legal documents analyzed</p>
-                        </div>
-                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
-                          <h5 className="font-medium text-gray-900 dark:text-white">Legal Compliance</h5>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">Stay compliant with UAE regulations</p>
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Resources</NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      <div className="grid grid-cols-1 gap-3 p-4 w-[200px]">
-                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
-                          <h5 className="font-medium text-gray-900 dark:text-white">Knowledge Base</h5>
-                        </div>
-                        <div className="p-2 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md">
-                          <h5 className="font-medium text-gray-900 dark:text-white">Legal Templates</h5>
-                        </div>
-                      </div>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <Link to="#pricing" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple px-3 py-2">
-                      Pricing
-                    </Link>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
               <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">Login</Link>
               <Link to="/signup" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-4 py-2 rounded-md">
                 Sign Up
