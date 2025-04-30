@@ -1,29 +1,22 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { motion } from 'framer-motion';
-
 const HeroSection: React.FC = () => {
-  return (
-    <AuroraBackground className="min-h-screen flex items-center">
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-        className="max-w-5xl mx-auto text-center px-4 pt-24 z-10"
-      >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
-          Your super startups' legal assistant
-        </h1>
-        <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-10 max-w-3xl mx-auto">
-          Muwakkil makes UAE mainland legal compliance simple with AI-powered document review, 
-          generation, and expert legal advice.
-        </p>
+  return <AuroraBackground className="min-h-screen flex items-center">
+      <motion.div initial={{
+      opacity: 0.0,
+      y: 40
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      delay: 0.3,
+      duration: 0.8,
+      ease: "easeInOut"
+    }} className="max-w-5xl mx-auto text-center px-4 pt-24 z-10">
+        <h1 className="text-4xl md:text-5xl font-bold mb-6 text-indigo-950 mx-0 px-0 lg:text-6xl">Your super startup's legal assistant</h1>
+        <p className="text-xl mb-10 max-w-3xl mx-auto md:text-lg text-zinc-400">Muwakkil makes legal compliance simple with AI-powered document review, generation, and expert legal advice anywhere in UAE.</p>
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-8 py-4 rounded-md text-lg font-medium">
             Start for Free
@@ -33,8 +26,6 @@ const HeroSection: React.FC = () => {
           </a>
         </div>
       </motion.div>
-    </AuroraBackground>
-  );
+    </AuroraBackground>;
 };
-
 export default HeroSection;
