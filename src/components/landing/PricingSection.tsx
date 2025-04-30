@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckIcon } from 'lucide-react';
@@ -48,9 +47,11 @@ const PricingPlan: React.FC<PricingPlanProps> = ({
     className={`bg-white dark:bg-gray-800 p-8 rounded-lg shadow-sm ${popular ? 'border-2 border-muwakkil-purple shadow-lg relative' : 'border border-gray-100 dark:border-gray-700'}`}
     whileHover={{ 
       y: -10,
-      boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+      transition: {
+        duration: 0.3,
+        ease: "easeOut"
+      }
     }}
-    transition={{ type: "spring", stiffness: 300 }}
   >
     {popular && (
       <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-muwakkil-purple text-white px-4 py-1 rounded-full text-sm">
