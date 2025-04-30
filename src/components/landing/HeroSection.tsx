@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { motion } from 'framer-motion';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 
 const HeroSection: React.FC = () => {
   return <AuroraBackground className="min-h-screen flex items-center">
@@ -61,8 +62,8 @@ const HeroSection: React.FC = () => {
           }} 
           className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"
         >
-          <Link to="/app" className="bg-muwakkil-purple hover:bg-purple-600 text-white px-8 py-4 rounded-md text-lg font-medium">
-            Start for Free
+          <Link to="/app">
+            <RainbowButton>Start for Free</RainbowButton>
           </Link>
           <a href="#features" className="border border-gray-300 bg-white dark:bg-transparent dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 px-8 py-4 rounded-md text-lg font-medium">
             Learn More
