@@ -30,8 +30,16 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   onRegenerateResponse,
   onFeedback,
 }) => {
-  const { bookmarks } = useBookmarkStore();
+  const { bookmarks, removeBookmark } = useBookmarkStore();
   const isAlreadyBookmarked = bookmarks.some(bookmark => bookmark.id === message.id);
+  
+  const handleBookmarkToggle = () => {
+    if (isAlreadyBookmarked) {
+      removeBookmark(message.id);
+    } else if (onBookmark) {
+      onBookmark(message.id);
+    }
+  };
   
   if (message.sender === 'user') {
     return <UserMessage content={message.content} />;
@@ -41,7 +49,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
     <AIMessage
       content={message.content}
       actionLogSteps={actionLogSteps}
-      onBookmark={() => onBookmark && onBookmark(message.id)}
+      onBookmark={handleBookmarkToggle}
       onCopy={onCopy}
       onRegenerateResponse={onRegenerateResponse}
       onFeedback={onFeedback}
