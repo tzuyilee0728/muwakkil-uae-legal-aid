@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckIcon } from 'lucide-react';
@@ -90,7 +89,7 @@ const PricingPlan: React.FC<PricingPlanProps> = ({
         ctaVariant === 'primary' 
           ? 'bg-muwakkil-purple hover:bg-purple-600 text-white' 
           : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-white'
-      } text-primary-foreground font-medium transition-all duration-300`}
+      } font-medium transition-all duration-300`}
     >
       {ctaText}
     </Link>
