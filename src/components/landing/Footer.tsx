@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             <span className="ml-2 font-bold text-lg text-slate-50">Muwakkil</span>
           </div>
           <p className="text-gray-400">
-            AI-powered legal assistant for UAE startups and businesses.
+            {t('landing.footer.description')}
           </p>
         </div>
         
@@ -29,22 +29,22 @@ const Footer: React.FC = () => {
         </div>
         
         <div>
-          <h4 className="text-lg mb-4 font-medium text-slate-50">Resources</h4>
+          <h4 className="text-lg mb-4 font-medium text-slate-50">{t('landing.footer.resources')}</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-400 hover:text-white">Knowledge Base</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Templates</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">FAQ</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Support</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.knowledgeBase')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.templates')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.faq')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.support')}</a></li>
           </ul>
         </div>
         
         <div>
-          <h4 className="text-lg font-medium mb-4 text-slate-50">Legal</h4>
+          <h4 className="text-lg font-medium mb-4 text-slate-50">{t('landing.footer.legal')}</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-400 hover:text-white">Terms of Service</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Privacy Policy</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Disclaimer</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Cookie Policy</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.terms')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.privacy')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.disclaimer')}</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white">{t('landing.footer.cookie')}</a></li>
           </ul>
         </div>
       </div>

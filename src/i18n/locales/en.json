@@ -52,6 +52,17 @@
       "careers": "Careers",
       "blog": "Blog",
       "contact": "Contact",
+      "resources": "Resources",
+      "knowledgeBase": "Knowledge Base",
+      "templates": "Templates",
+      "faq": "FAQ",
+      "support": "Support",
+      "legal": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "disclaimer": "Disclaimer",
+      "cookie": "Cookie Policy",
+      "description": "AI-powered legal assistant for UAE startups and businesses.",
       "rights": "All rights reserved."
     }
   },
