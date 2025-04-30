@@ -124,15 +124,15 @@ const MessageActions: React.FC<MessageActionsProps> = ({
   };
 
   return (
-    <div className="mt-4 flex items-center space-x-4 text-gray-500 dark:text-gray-400">
+    <div className="mt-4 flex items-center space-x-2 text-gray-500 dark:text-gray-400">
       <TooltipProvider delayDuration={0}>
-        {/* Copy button - Fixed positioning issue */}
+        {/* Copy button - Removed border and reduced size */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className="relative disabled:opacity-100 border-0 w-8 h-8"
+              className="relative w-8 h-8 p-0 disabled:opacity-100"
               onClick={handleCopy}
               aria-label={isCopied ? "Copied" : "Copy to clipboard"}
               disabled={isCopied}
@@ -147,13 +147,13 @@ const MessageActions: React.FC<MessageActionsProps> = ({
           <TooltipContent className="px-2 py-1 text-xs">Copy message</TooltipContent>
         </Tooltip>
 
-        {/* Like button - Added toggle functionality */}
+        {/* Like button - Removed border */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className={cn("border-0", liked && "text-muwakkil-purple dark:text-primary")}
+              className={cn("p-0 w-8 h-8", liked && "text-muwakkil-purple dark:text-primary")}
               onClick={handleLike}
               aria-label={liked ? "Remove like" : "Like"}
             >
@@ -165,13 +165,13 @@ const MessageActions: React.FC<MessageActionsProps> = ({
           </TooltipContent>
         </Tooltip>
 
-        {/* Dislike button - Added toggle functionality */}
+        {/* Dislike button - Removed border */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className={cn("border-0", disliked && "text-muwakkil-purple dark:text-primary")}
+              className={cn("p-0 w-8 h-8", disliked && "text-muwakkil-purple dark:text-primary")}
               onClick={handleDislike}
               aria-label={disliked ? "Remove dislike" : "Dislike"}
             >
@@ -183,13 +183,13 @@ const MessageActions: React.FC<MessageActionsProps> = ({
           </TooltipContent>
         </Tooltip>
 
-        {/* Regenerate button */}
+        {/* Regenerate button - Removed border */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className="border-0"
+              className="p-0 w-8 h-8"
               onClick={() => onRegenerateResponse && onRegenerateResponse()}
               aria-label="Regenerate"
             >
@@ -199,13 +199,13 @@ const MessageActions: React.FC<MessageActionsProps> = ({
           <TooltipContent className="px-2 py-1 text-xs">Regenerate response</TooltipContent>
         </Tooltip>
 
-        {/* Bookmark button - Updated to toggle */}
+        {/* Bookmark button - Removed border */}
         <Tooltip>
           <TooltipTrigger asChild>
             <HoverButton
-              variant="outline"
+              variant="ghost"
               size="icon"
-              className="border-0"
+              className="p-0 w-8 h-8"
               onClick={handleBookmark}
               aria-label={bookmarked ? "Remove bookmark" : "Bookmark"}
             >
