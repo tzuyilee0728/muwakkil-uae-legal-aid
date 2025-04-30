@@ -19,7 +19,7 @@ const EmptyKnowledgeState: React.FC<EmptyKnowledgeStateProps> = ({ onAddClick })
         </svg>
       </div>
       <h2 className="text-xl font-medium mb-2">No Knowledge Items Yet</h2>
-      <p className="text-gray-500 dark:text-gray-400 text-center mb-6">Add documents to help Waha understand your context better</p>
+      <p className="text-gray-500 dark:text-gray-400 text-center mb-6">Add documents to help Muwakkil understand your context better</p>
       <button onClick={onAddClick} className="flex items-center px-4 py-2 bg-muwakkil-purple text-white rounded-md hover:bg-purple-600">
         <Plus size={18} className="mr-2" />
         <span className="text-slate-50">Add Knowledge</span>

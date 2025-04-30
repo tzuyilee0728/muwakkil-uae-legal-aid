@@ -23,7 +23,7 @@ const KnowledgePage: React.FC = () => {
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h1 className="text-2xl font-semibold">Knowledge</h1>
-                <p className="text-gray-500 dark:text-gray-400">Knowledge help Waha understand the context of your question.</p>
+                <p className="text-gray-500 dark:text-gray-400">Knowledge help Muwakkil understand the context of your question.</p>
               </div>
               <button 
                 onClick={() => setShowAddModal(true)} 
