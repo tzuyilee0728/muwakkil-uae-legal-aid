@@ -4,7 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
+import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 import KnowledgePage from "./pages/KnowledgePage";
 import BookmarksPage from "./pages/BookmarksPage";
@@ -23,6 +23,14 @@ const isAuthenticated = true;
 
 const queryClient = new QueryClient();
 
+// Create a protected route component
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -30,7 +38,9 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          {/* Home page always visible */}
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<HomePage />} />
           
           {/* Auth routes */}
           <Route element={<AuthLayout />}>
@@ -39,10 +49,18 @@ const App = () => (
           </Route>
           
           {/* Disclaimer page after login */}
-          <Route path="/disclaimer" element={<DisclaimerPage />} />
+          <Route path="/disclaimer" element={
+            <ProtectedRoute>
+              <DisclaimerPage />
+            </ProtectedRoute>
+          } />
           
           {/* App routes - protected in a real app */}
-          <Route path="/app" element={<AppLayout />}>
+          <Route path="/app" element={
+            <ProtectedRoute>
+              <AppLayout />
+            </ProtectedRoute>
+          }>
             {/* Redirect root /app directly to chat */}
             <Route index element={<Navigate to="/app/chat" replace />} />
             <Route path="chat" element={<ChatPage />} />
@@ -51,9 +69,6 @@ const App = () => (
             <Route path="account" element={<AccountPage />} />
             <Route path="find-lawyer" element={<FindLawyerPage />} />
           </Route>
-          
-          {/* Add a redirect from / to /app/chat for direct access */}
-          <Route path="/chat" element={<Navigate to="/app/chat" replace />} />
           
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -1,23 +1,9 @@
 
-import React from 'react';
-import Header from '../components/landing/Header';
-import HeroSection from '../components/landing/HeroSection';
-import FeaturesSection from '../components/landing/FeaturesSection';
-import TestimonialsSection from '../components/landing/TestimonialsSection';
-import PricingSection from '../components/landing/PricingSection';
-import Footer from '../components/landing/Footer';
+import React, { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const LandingPage: React.FC = () => {
-  return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <Header />
-      <HeroSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <PricingSection />
-      <Footer />
-    </div>
-  );
+  return <Navigate to="/home" replace />;
 };
 
 export default LandingPage;

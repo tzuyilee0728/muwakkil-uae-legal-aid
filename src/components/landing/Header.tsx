@@ -12,15 +12,27 @@ const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const { t } = useTranslation();
   
+  // This would come from your authentication system
+  // For now, we'll use the mock from App.tsx
+  const isAuthenticated = true; // Using the same mock for demo
+  
   return (
     <header className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 fixed top-0 left-0 right-0 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <Logo />
+          <Link to="/home">
+            <Logo />
+          </Link>
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
-              {t('common.login')}
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/app/chat" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
+                {t('header.dashboard')}
+              </Link>
+            ) : (
+              <Link to="/login" className="text-gray-700 hover:text-muwakkil-purple dark:text-gray-300 dark:hover:text-muwakkil-purple">
+                {t('common.login')}
+              </Link>
+            )}
             <LanguageSwitch />
             <Button 
               variant="ghost" 
