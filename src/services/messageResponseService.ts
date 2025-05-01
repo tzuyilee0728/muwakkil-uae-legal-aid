@@ -25,6 +25,8 @@ export const simulateAIResponse = (
   // Make the actual backend request
   fetchFromMuwakkilBackend(message)
     .then(responseData => {
+      console.log("API response received:", responseData);
+      
       // Create final logs
       const finalLogs: ActionLogStep[] = [
         { text: 'Analyzed query', source: 'Knowledge Base' },
@@ -63,7 +65,7 @@ export const simulateAIResponse = (
       // Create the AI response message
       const aiResponse: Message = {
         id: uuidv4(),
-        content: responseData.response || "I'm sorry, I couldn't process your request at this time.",
+        content: responseData.response || responseData.answer || "I'm sorry, I couldn't process your request at this time.",
         sender: 'ai',
         timestamp: new Date(),
       };
@@ -100,6 +102,8 @@ export const simulateAIResponse = (
  */
 const fetchFromMuwakkilBackend = async (question: string) => {
   try {
+    console.log("Sending question to backend:", question);
+    
     const response = await fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/muwakkil', {
       method: 'POST',
       headers: {
@@ -117,6 +121,7 @@ const fetchFromMuwakkilBackend = async (question: string) => {
     }
     
     const data = await response.json();
+    console.log("Backend response:", data);
     return data;
   } catch (error) {
     console.error("Error in backend request:", error);
@@ -160,6 +165,7 @@ export const analyzeFile = async (file: File): Promise<any> => {
         }
         
         const data = await response.json();
+        console.log("File analysis response:", data);
         resolve(data);
       } catch (error) {
         console.error("Error in file analysis request:", error);
@@ -175,4 +181,3 @@ export const analyzeFile = async (file: File): Promise<any> => {
     reader.readAsDataURL(file);
   });
 };
-

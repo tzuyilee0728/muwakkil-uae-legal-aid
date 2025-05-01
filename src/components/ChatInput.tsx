@@ -46,8 +46,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
           
           // If we have analysis results, format them as a message
           if (result) {
+            console.log("File analysis result:", result);
             const analysisMessage = `File Analysis for: ${selectedFiles[0].name}\n\n` +
-              (result.analysis || result.response || JSON.stringify(result));
+              (result.analysis || result.response || result.answer || JSON.stringify(result));
             
             onSendMessage(analysisMessage);
           }
