@@ -20,6 +20,7 @@ const ChatPage: React.FC = () => {
     handleSendMessage, 
     handleFileUpload, 
     handleBookmark,
+    handleCancelResponse,
     actionLogSteps,
     chatTitle,
     handleFeedback,
@@ -71,6 +72,7 @@ const ChatPage: React.FC = () => {
             actionLogSteps={actionLogSteps}
             onBookmark={handleBookmark}
             onFeedback={handleFeedback}
+            onCancelResponse={handleCancelResponse}
           />
           
           {/* Input area */}

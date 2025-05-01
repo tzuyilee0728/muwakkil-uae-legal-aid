@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import ChatMessage from '../ChatMessage';
 import { Message, ActionLogStep } from '../../types/chat';
 import { TextShimmer } from '@/components/ui/text-shimmer';
-import { ClockIcon } from 'lucide-react';
+import { ClockIcon, XCircleIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface ChatContainerProps {
   messages: Message[];
@@ -12,6 +13,7 @@ interface ChatContainerProps {
   actionLogSteps?: ActionLogStep[];
   onBookmark?: (messageId: string) => void;
   onFeedback?: (type: 'positive' | 'negative') => void;
+  onCancelResponse?: () => void;
 }
 
 const ChatContainer: React.FC<ChatContainerProps> = ({
@@ -19,7 +21,8 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
   loading = false,
   actionLogSteps = [],
   onBookmark,
-  onFeedback
+  onFeedback,
+  onCancelResponse
 }) => {
   const { t } = useTranslation();
 
@@ -33,7 +36,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
               <div className="p-2 rounded-full bg-muted flex items-center justify-center">
                 <ClockIcon size={18} className="text-primary" />
               </div>
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-2 flex-1">
                 <TextShimmer 
                   className="font-medium text-base text-foreground"
                   duration={1.5}
@@ -47,6 +50,17 @@ const ChatContainer: React.FC<ChatContainerProps> = ({
                   {t('chat.searching')}
                 </TextShimmer>
               </div>
+              {onCancelResponse && (
+                <Button 
+                  variant="outline"
+                  onClick={onCancelResponse}
+                  className="ml-auto flex items-center gap-1"
+                  size="sm"
+                >
+                  <XCircleIcon size={16} />
+                  {t('chat.cancelRequest')}
+                </Button>
+              )}
             </div>
           </div>
         </div>

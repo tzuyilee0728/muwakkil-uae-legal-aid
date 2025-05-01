@@ -1,7 +1,17 @@
-
 import { v4 as uuidv4 } from 'uuid';
 import { Message, ActionLogStep, KnowledgeItem } from '../types/chat';
 import { getKnowledgeItems } from '../utils/chatUtils';
+
+// Track active requests for cancellation
+let activeRequest: AbortController | null = null;
+
+// Function to cancel any pending requests
+export const cancelPendingRequests = () => {
+  if (activeRequest) {
+    activeRequest.abort();
+    activeRequest = null;
+  }
+};
 
 export const simulateAIResponse = (
   message: string,
@@ -22,10 +32,17 @@ export const simulateAIResponse = (
     { text: 'Searching knowledge base...', source: 'User Knowledge Base' }
   ]);
   
+  // Create a new abort controller for this request
+  if (activeRequest) {
+    activeRequest.abort(); // Cancel any existing request
+  }
+  activeRequest = new AbortController();
+  
   // Make the actual backend request
-  fetchFromMuwakkilBackend(message)
+  fetchFromMuwakkilBackend(message, activeRequest.signal)
     .then(responseData => {
       console.log("API response received:", responseData);
+      activeRequest = null;
       
       // Create final logs
       const finalLogs: ActionLogStep[] = [
@@ -74,7 +91,14 @@ export const simulateAIResponse = (
       onComplete(aiResponse, finalLogs);
     })
     .catch(error => {
+      // Don't handle the error if it was an abort
+      if (error.name === 'AbortError') {
+        console.log('Request was cancelled');
+        return;
+      }
+      
       console.error("Error fetching from Muwakkil backend:", error);
+      activeRequest = null;
       
       // Create fallback response in case of error
       const fallbackResponse: Message = {
@@ -100,7 +124,7 @@ export const simulateAIResponse = (
  * Fetches response from Muwakkil backend API
  * Uses default user_id and action values
  */
-const fetchFromMuwakkilBackend = async (question: string) => {
+const fetchFromMuwakkilBackend = async (question: string, signal?: AbortSignal) => {
   try {
     console.log("Sending question to backend:", question);
     
@@ -113,7 +137,8 @@ const fetchFromMuwakkilBackend = async (question: string) => {
         "action": "ask_question", // Default action
         "user_id": "12345", // Default user_id
         "question": question
-      })
+      }),
+      signal // Pass the abort signal to fetch
     });
     
     if (!response.ok) {

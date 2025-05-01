@@ -11,7 +11,7 @@ import {
   loadSpecificChat,
   saveChatHistory 
 } from '../services/chatHistoryService';
-import { simulateAIResponse } from '../services/messageResponseService';
+import { simulateAIResponse, cancelPendingRequests } from '../services/messageResponseService';
 import { ChatHistory } from '../types/chat';
 
 export const useChat = (chatId: string | null) => {
@@ -74,6 +74,15 @@ export const useChat = (chatId: string | null) => {
     const updatedHistory = saveChatHistory(messages, currentChatId, chatHistory, chatCreatedAt);
     setChatHistory(updatedHistory);
   }, [messages]);
+
+  const handleCancelResponse = () => {
+    cancelPendingRequests();
+    setLoading(false);
+    toast({
+      title: t('chat.requestCancelled'),
+      description: t('chat.requestCancelledDesc'),
+    });
+  };
 
   const handleSendMessage = (message: string) => {
     const newMessage: Message = {
@@ -185,6 +194,7 @@ export const useChat = (chatId: string | null) => {
     handleFileUpload,
     handleBookmark,
     handleFeedback,
+    handleCancelResponse,
     actionLogSteps,
     chatTitle: currentChatTitle,
     createdAt,
