@@ -13,17 +13,17 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <div className="flex flex-col items-center justify-center w-full min-h-[80vh]">
+      <div className="bg-white dark:bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10 w-full max-w-md">
         <div className="mb-6 text-center">
-          <h2 className="text-2xl font-semibold">Create an account</h2>
-          <p className="text-gray-600 mt-2">Start your legal journey with Muwakkil</p>
+          <h2 className="text-2xl font-semibold dark:text-white">Create an account</h2>
+          <p className="text-gray-600 dark:text-gray-300 mt-2">Start your legal journey with Muwakkil</p>
         </div>
         
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="first-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 First name
               </label>
               <div className="mt-1">
@@ -33,13 +33,13 @@ const SignupPage: React.FC = () => {
                   type="text"
                   autoComplete="given-name"
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
               </div>
             </div>
             
             <div>
-              <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="last-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 Last name
               </label>
               <div className="mt-1">
@@ -49,14 +49,14 @@ const SignupPage: React.FC = () => {
                   type="text"
                   autoComplete="family-name"
                   required
-                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                 />
               </div>
             </div>
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Email address
             </label>
             <div className="mt-1">
@@ -66,13 +66,13 @@ const SignupPage: React.FC = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Password
             </label>
             <div className="mt-1">
@@ -82,7 +82,7 @@ const SignupPage: React.FC = () => {
                 type="password"
                 autoComplete="new-password"
                 required
-                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm"
+                className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-muwakkil-purple focus:border-muwakkil-purple sm:text-sm dark:bg-gray-700 dark:border-gray-600 dark:text-white"
               />
             </div>
           </div>
@@ -94,11 +94,11 @@ const SignupPage: React.FC = () => {
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-muwakkil-purple focus:ring-muwakkil-purple border-gray-300 rounded"
+                className="h-4 w-4 text-muwakkil-purple focus:ring-muwakkil-purple border-gray-300 rounded dark:border-gray-600 dark:bg-gray-700"
               />
             </div>
             <div className="ml-3 text-sm">
-              <label htmlFor="terms" className="font-medium text-gray-700">
+              <label htmlFor="terms" className="font-medium text-gray-700 dark:text-gray-300">
                 I agree to the{' '}
                 <a href="#" className="text-muwakkil-purple hover:text-purple-600">
                   Terms of Service
@@ -124,10 +124,10 @@ const SignupPage: React.FC = () => {
         <div className="mt-6">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300" />
+              <div className="w-full border-t border-gray-300 dark:border-gray-600" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
+              <span className="px-2 bg-white text-gray-500 dark:bg-gray-800 dark:text-gray-400">Or continue with</span>
             </div>
           </div>
 
@@ -135,7 +135,7 @@ const SignupPage: React.FC = () => {
             <div>
               <a
                 href="#"
-                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-600"
               >
                 <svg className="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z" fill="#EA4335"/>
@@ -149,7 +149,7 @@ const SignupPage: React.FC = () => {
         </div>
         
         <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{' '}
             <Link to="/login" className="font-medium text-muwakkil-purple hover:text-purple-600">
               Sign in
