@@ -63,7 +63,7 @@ export const simulateAIResponse = (
       // Create the AI response message
       const aiResponse: Message = {
         id: uuidv4(),
-        content: responseData.answer || "I'm sorry, I couldn't process your request at this time.",
+        content: responseData.response || "I'm sorry, I couldn't process your request at this time.",
         sender: 'ai',
         timestamp: new Date(),
       };
@@ -96,6 +96,7 @@ export const simulateAIResponse = (
 
 /**
  * Fetches response from Muwakkil backend API
+ * Uses default user_id and action values
  */
 const fetchFromMuwakkilBackend = async (question: string) => {
   try {
@@ -105,8 +106,8 @@ const fetchFromMuwakkilBackend = async (question: string) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "action": "ask_question",
-        "user_id": "12345", // In a real app, this would be the actual user ID
+        "action": "ask_question", // Default action
+        "user_id": "12345", // Default user_id
         "question": question
       })
     });
