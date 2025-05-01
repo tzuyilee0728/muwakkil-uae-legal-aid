@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 import ChatInput from '../components/ChatInput';
 import ChatContainer from '../components/chat/ChatContainer';
@@ -12,7 +12,7 @@ const ChatPage: React.FC = () => {
   // Use search parameters instead of path parameters
   const [searchParams] = useSearchParams();
   const chatId = searchParams.get('id');
-  const location = useLocation();
+  const navigate = useNavigate();
   
   const { 
     messages, 
@@ -23,13 +23,21 @@ const ChatPage: React.FC = () => {
     actionLogSteps,
     chatTitle,
     handleFeedback,
-    createdAt
+    createdAt,
+    chatId: generatedChatId
   } = useChat(chatId);
   
   // Format timestamp if available
   const formattedTimestamp = createdAt 
-    ? format(new Date(createdAt), 'M/d/yy HH:mm')
+    ? format(new Date(createdAt), 'MM/dd/yyyy HH:mm')
     : '';
+
+  // If we have a new chat ID from useChat (i.e., a new chat was created), update the URL
+  useEffect(() => {
+    if (generatedChatId && !chatId) {
+      navigate(`/app/chat?id=${generatedChatId}`, { replace: true });
+    }
+  }, [generatedChatId, chatId, navigate]);
 
   // Update the document title when the chat title changes
   useEffect(() => {

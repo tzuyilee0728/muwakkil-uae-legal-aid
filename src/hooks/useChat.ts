@@ -12,9 +12,7 @@ import {
   saveChatHistory 
 } from '../services/chatHistoryService';
 import { simulateAIResponse } from '../services/messageResponseService';
-
-// Change to export type for TypeScript with isolatedModules
-export type { Message, ActionLogStep } from '../types/chat';
+import { ChatHistory } from '../types/chat';
 
 export const useChat = (chatId: string | null) => {
   const { t } = useTranslation();
@@ -23,8 +21,9 @@ export const useChat = (chatId: string | null) => {
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
   const [createdAt, setCreatedAt] = useState<string | null>(null);
+  const [localChatId, setLocalChatId] = useState<string | null>(chatId);
   const { toast } = useToast();
-  const { addBookmark, removeBookmark } = useBookmarkStore();
+  const { addBookmark } = useBookmarkStore();
   
   // Load chat history on mount
   useEffect(() => {
@@ -43,12 +42,26 @@ export const useChat = (chatId: string | null) => {
       if (currentChat?.createdAt) {
         setCreatedAt(currentChat.createdAt);
       }
+      
+      setLocalChatId(chatId);
+    } else {
+      // Reset everything for a new chat
+      setMessages([]);
+      setActionLogSteps([]);
+      setCreatedAt(null);
+      setLocalChatId(null);
     }
   }, [chatId]);
   
   // Save chat history when messages change
   useEffect(() => {
     if (messages.length === 0) return;
+    
+    // Generate a new chat ID if we don't have one yet
+    const currentChatId = localChatId || uuidv4();
+    if (!localChatId && messages.length > 0) {
+      setLocalChatId(currentChatId);
+    }
     
     const now = new Date().toISOString();
     let chatCreatedAt = createdAt;
@@ -58,7 +71,7 @@ export const useChat = (chatId: string | null) => {
       setCreatedAt(now);
     }
     
-    const updatedHistory = saveChatHistory(messages, chatId, chatHistory, chatCreatedAt);
+    const updatedHistory = saveChatHistory(messages, currentChatId, chatHistory, chatCreatedAt);
     setChatHistory(updatedHistory);
   }, [messages]);
 
@@ -74,6 +87,9 @@ export const useChat = (chatId: string | null) => {
     
     // Analyze user intent based on message history
     const userIntent = analyzeUserIntent(message, messages);
+    
+    // Set loading state
+    setLoading(true);
     
     simulateAIResponse(
       message,
@@ -159,7 +175,7 @@ export const useChat = (chatId: string | null) => {
   };
   
   // Compute the current chat title
-  const currentChatHistory = chatHistory.find(chat => chat.id === chatId);
+  const currentChatHistory = chatHistory.find(chat => chat.id === localChatId);
   const currentChatTitle = currentChatHistory?.title || generateChatTitle();
 
   return {
@@ -171,9 +187,7 @@ export const useChat = (chatId: string | null) => {
     handleFeedback,
     actionLogSteps,
     chatTitle: currentChatTitle,
-    createdAt
+    createdAt,
+    chatId: localChatId
   };
 };
-
-// Import ChatHistory for the effect
-import { ChatHistory } from '../types/chat';

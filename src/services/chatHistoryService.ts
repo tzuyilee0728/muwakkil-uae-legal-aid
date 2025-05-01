@@ -4,7 +4,14 @@ import { Message, ChatHistory } from '../types/chat';
 
 export const loadChatHistory = (): ChatHistory[] => {
   const storedHistory = localStorage.getItem('chatHistory');
-  return storedHistory ? JSON.parse(storedHistory) : [];
+  const history = storedHistory ? JSON.parse(storedHistory) : [];
+  
+  // Sort by newest first based on createdAt date
+  return history.sort((a: ChatHistory, b: ChatHistory) => {
+    const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+    const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+    return dateB - dateA;
+  });
 };
 
 export const loadSpecificChat = (chatId: string): Message[] => {
@@ -54,7 +61,7 @@ export const saveChatHistory = (
       updatedHistory[existingChatIndex].createdAt = createdAt;
     }
   } else {
-    updatedHistory.push({
+    updatedHistory.unshift({
       id: currentChatId,
       messages: messages,
       title: title,
