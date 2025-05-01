@@ -44,35 +44,39 @@ const ChatPage: React.FC = () => {
     document.title = chatTitle ? `${chatTitle} | Muwakkil` : 'Chat | Muwakkil';
   }, [chatTitle]);
 
-  // Always show prompt suggestions if we have no messages
-  if (messages.length === 0) {
-    return (
-      <div className="flex-1 flex flex-col relative h-full">
-        <ChatPromptSuggestions onSelectPrompt={handleSendMessage} />
-        <ChatInput onSendMessage={handleSendMessage} onFileUpload={handleFileUpload} />
-      </div>
-    );
-  }
+  // If there are no messages, this is a new chat - show prompt suggestions
+  const isNewChat = messages.length === 0;
 
   return (
     <div className="flex-1 flex flex-col relative h-full">
-      {/* Chat title */}
-      <ChatHeader 
-        title={chatTitle || "New Chat"}
-        timestamp={formattedTimestamp}
-      />
-      
-      {/* Messages list */}
-      <ChatContainer 
-        messages={messages} 
-        loading={loading} 
-        actionLogSteps={actionLogSteps}
-        onBookmark={handleBookmark}
-        onFeedback={handleFeedback}
-      />
-      
-      {/* Input area */}
-      <ChatInput onSendMessage={handleSendMessage} onFileUpload={handleFileUpload} />
+      {isNewChat ? (
+        <>
+          <ChatPromptSuggestions onSelectPrompt={handleSendMessage} />
+          <div className="absolute bottom-0 left-0 right-0">
+            <ChatInput onSendMessage={handleSendMessage} onFileUpload={handleFileUpload} />
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Chat title */}
+          <ChatHeader 
+            title={chatTitle || "New Chat"}
+            timestamp={formattedTimestamp}
+          />
+          
+          {/* Messages list */}
+          <ChatContainer 
+            messages={messages} 
+            loading={loading} 
+            actionLogSteps={actionLogSteps}
+            onBookmark={handleBookmark}
+            onFeedback={handleFeedback}
+          />
+          
+          {/* Input area */}
+          <ChatInput onSendMessage={handleSendMessage} onFileUpload={handleFileUpload} />
+        </>
+      )}
     </div>
   );
 };
