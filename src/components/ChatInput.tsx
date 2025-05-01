@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Paperclip, Send, X } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { analyzeFile } from '../services/messageResponseService';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -12,6 +13,7 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) => {
   const [message, setMessage] = useState('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [analyzing, setAnalyzing] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -30,13 +32,40 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
     textarea.style.height = `${Math.min(textarea.scrollHeight, 500)}px`;
   }, [message]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // If there are files selected, upload them
+    // If there are files selected, analyze and upload them
     if (selectedFiles.length > 0) {
-      onFileUpload(selectedFiles);
-      setSelectedFiles([]);
+      try {
+        setAnalyzing(true);
+        
+        // Process first file only for now (can be expanded for multi-file support)
+        if (selectedFiles.length > 0) {
+          const result = await analyzeFile(selectedFiles[0]);
+          
+          // If we have analysis results, format them as a message
+          if (result) {
+            const analysisMessage = `File Analysis for: ${selectedFiles[0].name}\n\n` +
+              (result.analysis || result.response || JSON.stringify(result));
+            
+            onSendMessage(analysisMessage);
+          }
+        }
+        
+        onFileUpload(selectedFiles);
+        setSelectedFiles([]);
+        
+      } catch (error) {
+        console.error("Error analyzing files:", error);
+        toast({
+          title: "Analysis Failed",
+          description: "There was a problem analyzing the file. Please try again.",
+          variant: "destructive"
+        });
+      } finally {
+        setAnalyzing(false);
+      }
     }
     
     // If there's a message, send it
@@ -135,9 +164,14 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
         <div className="flex items-center self-end">
           <button 
             type="submit"
+            disabled={analyzing}
             className="p-3 ml-1 text-purple-600 dark:text-primary hover:bg-gray-100 dark:hover:bg-muted rounded-r-md"
           >
-            {(selectedFiles.length > 0 || message.trim()) ? <Send size={20} /> : null}
+            {analyzing ? (
+              <div className="w-5 h-5 border-2 border-t-transparent border-purple-600 rounded-full animate-spin"></div>
+            ) : (
+              (selectedFiles.length > 0 || message.trim()) ? <Send size={20} /> : null
+            )}
           </button>
         </div>
       </div>
@@ -146,6 +180,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, onFileUpload }) =>
       {selectedFiles.length > 0 && (
         <div className="max-w-4xl mx-auto mt-1 text-xs text-gray-500">
           {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} selected (max {MAX_FILES})
+          {analyzing && <span className="ml-2 text-purple-600">Analyzing file...</span>}
         </div>
       )}
     </form>

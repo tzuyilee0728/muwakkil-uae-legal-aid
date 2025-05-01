@@ -80,14 +80,7 @@ export const useChat = (chatId: string | null) => {
       ? t('chat.uploadedFile') 
       : t('chat.uploadedFiles', { count: files.length });
     
-    const newMessage: Message = {
-      id: uuidv4(),
-      content: `${fileCountText} ${fileNames}`,
-      sender: 'user',
-      timestamp: new Date(),
-    };
-    
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    // We don't add a message here since it's handled by the analysis process
     
     toast({
       title: t('chat.filesUploaded'),

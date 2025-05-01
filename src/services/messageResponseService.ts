@@ -123,3 +123,56 @@ const fetchFromMuwakkilBackend = async (question: string) => {
     throw error;
   }
 };
+
+/**
+ * Analyzes an uploaded file using the Muwakkil API
+ * @param file The file to analyze
+ * @returns Promise with the analysis results
+ */
+export const analyzeFile = async (file: File): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    
+    reader.onload = async (event) => {
+      try {
+        if (!event.target || !event.target.result) {
+          throw new Error('Error reading file');
+        }
+        
+        // Convert the file content to base64
+        const base64Content = (event.target.result as string).split(',')[1];
+        
+        const response = await fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/muwakkil', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            "action": "analyze_uploaded_file",
+            "filename": file.name,
+            "file_content": base64Content,
+            "user_id": "12345" // Default user_id
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Backend responded with status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        resolve(data);
+      } catch (error) {
+        console.error("Error in file analysis request:", error);
+        reject(error);
+      }
+    };
+    
+    reader.onerror = () => {
+      reject(new Error('Error reading file'));
+    };
+    
+    // Read the file as a data URL (which gives us base64)
+    reader.readAsDataURL(file);
+  });
+};
+
