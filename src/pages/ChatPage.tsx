@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
+import { format } from 'date-fns';
 import ChatInput from '../components/ChatInput';
 import ChatContainer from '../components/chat/ChatContainer';
 import ChatHeader from '../components/chat/ChatHeader';
@@ -21,8 +22,14 @@ const ChatPage: React.FC = () => {
     handleBookmark,
     actionLogSteps,
     chatTitle,
-    handleFeedback
+    handleFeedback,
+    createdAt
   } = useChat(chatId);
+  
+  // Format timestamp if available
+  const formattedTimestamp = createdAt 
+    ? format(new Date(createdAt), 'M/d/yy HH:mm')
+    : '';
 
   // Update the document title when the chat title changes
   useEffect(() => {
@@ -44,7 +51,7 @@ const ChatPage: React.FC = () => {
       {/* Chat title */}
       <ChatHeader 
         title={chatTitle || "New Chat"}
-        timestamp={chatId ? "4/23/25 19:20" : ""}
+        timestamp={formattedTimestamp}
       />
       
       {/* Messages list */}

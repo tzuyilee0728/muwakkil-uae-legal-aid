@@ -22,6 +22,7 @@ export const useChat = (chatId: string | null) => {
   const [loading, setLoading] = useState(false);
   const [actionLogSteps, setActionLogSteps] = useState<ActionLogStep[]>([]);
   const [chatHistory, setChatHistory] = useState<ChatHistory[]>([]);
+  const [createdAt, setCreatedAt] = useState<string | null>(null);
   const { toast } = useToast();
   const { addBookmark, removeBookmark } = useBookmarkStore();
   
@@ -32,16 +33,32 @@ export const useChat = (chatId: string | null) => {
     
     // If we have a chatId, try to load this specific chat
     if (chatId) {
+      const currentChat = history.find(chat => chat.id === chatId);
       const currentChatMessages = loadSpecificChat(chatId);
+      
       if (currentChatMessages.length > 0) {
         setMessages(currentChatMessages);
+      }
+      
+      if (currentChat?.createdAt) {
+        setCreatedAt(currentChat.createdAt);
       }
     }
   }, [chatId]);
   
   // Save chat history when messages change
   useEffect(() => {
-    const updatedHistory = saveChatHistory(messages, chatId, chatHistory);
+    if (messages.length === 0) return;
+    
+    const now = new Date().toISOString();
+    let chatCreatedAt = createdAt;
+    
+    if (!chatCreatedAt) {
+      chatCreatedAt = now;
+      setCreatedAt(now);
+    }
+    
+    const updatedHistory = saveChatHistory(messages, chatId, chatHistory, chatCreatedAt);
     setChatHistory(updatedHistory);
   }, [messages]);
 
@@ -122,10 +139,28 @@ export const useChat = (chatId: string | null) => {
     });
   };
 
+  // Generate a chat title based on the first user message
+  const generateChatTitle = (): string => {
+    if (messages.length === 0) return t('sidebar.newChat');
+    
+    const userMessages = messages.filter(m => m.sender === 'user');
+    if (userMessages.length === 0) return t('sidebar.newChat');
+    
+    // Get the first message content
+    const firstMessage = userMessages[0].content;
+    
+    // Limit to first 30 characters and add ellipsis if needed
+    const maxLength = 40;
+    const title = firstMessage.length > maxLength 
+      ? `${firstMessage.substring(0, maxLength)}...` 
+      : firstMessage;
+      
+    return title;
+  };
+  
   // Compute the current chat title
-  const currentChatTitle = chatId 
-    ? "Eligibility check for DIFC's government grants" 
-    : t('sidebar.newChat');
+  const currentChatHistory = chatHistory.find(chat => chat.id === chatId);
+  const currentChatTitle = currentChatHistory?.title || generateChatTitle();
 
   return {
     messages,
@@ -135,7 +170,8 @@ export const useChat = (chatId: string | null) => {
     handleBookmark,
     handleFeedback,
     actionLogSteps,
-    chatTitle: currentChatTitle
+    chatTitle: currentChatTitle,
+    createdAt
   };
 };
 

@@ -22,6 +22,7 @@ export interface ChatHistory {
   id: string;
   messages: Message[];
   title?: string;
+  createdAt?: string;
 }
 
 export interface BookmarkItem {
